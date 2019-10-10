@@ -27696,3 +27696,8 @@ body {
     z-index: auto;
   }
 }
+.text-gray-700 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
