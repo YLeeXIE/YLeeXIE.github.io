@@ -27696,7 +27696,7 @@ body {
     z-index: auto;
   }
 }
-.text-gray-700 {
+.py-4 {
   display: flex;
   justify-content: center;
   align-items: center;
