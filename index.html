@@ -5,7 +5,7 @@
 <title>代码猿</title>
 <meta name="description" content="一入编程深似海
 从此妹子是路人" />
-<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1570726140587">
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1570726535154">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -25,7 +25,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://yleexie.github.io">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1570726140587" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1570726535154" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
       </div>
@@ -112,19 +112,6 @@
         
   <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
     
-    <div class="content">
-      <a href="https://yleexie.github.io/post/iGpG8z-2j">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">测试文章</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2019-10-11 / 1 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
-    
       <a href="https://yleexie.github.io/post/E1jNUuZ9D" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
         <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://yleexie.github.io/post-images/E1jNUuZ9D.png'">
         </div>
@@ -135,191 +122,13 @@
         <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">瀑布流的布局原理分析（纯CSS瀑布流与JS瀑布流）</h2>
       </a>
       <div class="post-abstract text-gray-700 font-light my-4">
-        <h1 id="瀑布流"><strong>瀑布流</strong></h1>
-<p>又称瀑布流式布局，是比较流行的一种网站页面布局方式。即多行等宽元素排列，后面的元素依次添加到其后，等宽不等高，根据图片原比例缩放直至宽度达到我们的要求，依次按照规则放入指定位置。</p>
-<img src="http://api.fly63.com/vue_blog/public/Uploads/20190928/5d8efe2906e03.jpg" /> 
-<h1 id="为什么使用瀑布流"><strong>为什么使用瀑布流</strong></h1>
-<p>瀑布流布局在我们现在的前端页面中经常会用的到，它可以有效的降低页面的复杂度，节省很多的空间，对于整个页面不需要太多的操作，只需要下拉就可以浏览用户需要看到的数据；并且，在当前这个APP至上的时代，瀑布流可以提供很好的用户体验，通过结合下拉刷新，上拉加载进行数据的懒加载等操作，对于用户的体验感来说是接近于满分的！</p>
-<h3 id="瀑布流的特点"><strong>瀑布流的特点</strong></h3>
-<p>其实瀑布流的特点就是参差不齐的排列方式，以及流式布局的扩展性，可以通过界面展示给用户多条数据，并且让用户可以有向下浏览的冲动。</p>
-<h3 id="瀑布流的代码实现"><strong>瀑布流的代码实现</strong></h3>
-<ol>
-<li>
-<p>纯 css 瀑布流：（ multi-columns 方法 ）</p>
-<p>这里是第一次接触到 column-columns 这个属性，这是一个可以设置将div元素中的文本分成几列</p>
-<p>默认值是：auto</p>
-<p>写法：</p>
-</li>
-</ol>
-<pre><code>column-count:3;
--moz-column-count:3; /* Firefox */
--webkit-column-count:3; /* Safari and Chrome */
-/* 注意：IE9及更早 IE 版本浏览器不支持 column-count 属性 */
-
-</code></pre>
-<pre><code>这里还会用到另一个属性 column-gap，用来调整边距，实现瀑布流布局
-</code></pre>
-<p>html结构代码如下：</p>
-<pre><code>&lt;div class=&quot;demo-1&quot;&gt; 
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-lar&quot; style=&quot;height:100px;&quot; &gt; 1&lt;/div&gt; 
-    &lt;/div&gt; 
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-sma&quot;style=&quot;height:150px;&quot; &gt; 2&lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-mid&quot;style=&quot;height:50px;&quot; &gt; 3&lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-sma&quot; style=&quot;height:200px;&quot; &gt; 4&lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-mid&quot;style=&quot;height:60px;&quot; &gt; 5 &lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-lar&quot;style=&quot;height:90px;&quot; &gt; 6&lt;/div&gt; 
-    &lt;/div&gt; 
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-sma&quot;&gt; 7&lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-lar&quot;style=&quot;height:120px;&quot; &gt; 8&lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-lar&quot;&gt; 9&lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-sma&quot; style=&quot;height:100px;&quot; &gt; 10 &lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-mid&quot;&gt; 11 &lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;item&quot;&gt; 
-        &lt;div class=&quot;item_content content-mid&quot;style=&quot;height:100px;&quot; &gt; 12&lt;/div&gt; 
-    &lt;/div&gt;
-    &lt;!-- more items --&gt; 
-&lt;/div&gt;
-</code></pre>
-<p>CSS代码如下：</p>
-<pre><code>.demo-1{ 
-       -moz-column-count:3; /* Firefox */
-       -webkit-column-count:3; /* Safari 和 Chrome */
-       column-count:3;
-       -moz-column-gap: 1em;
-       -webkit-column-gap: 1em;
-       column-gap: 1em;
-       width: 80%;
-       margin:0 auto;
-    }
-    .item { 
-        padding: 2em;
-        margin-bottom: 2em;
-        -webkit-column-break-inside: avoid;
-        break-inside: avoid; /*防止断点*/
-        background: #ccc;
-        text-align: center;
-    }
-</code></pre>
-<p>效果图：</p>
-<img src="http://api.fly63.com/vue_blog/public/Uploads/20190928/5d8efe4d92b28.jpg">
-<p>这里有个弊端，这并不符合瀑布流的原理，如果使用纯css写瀑布流，则每一块都是从上往下排列，不能做到从左到右排列，并且不会识别哪一块图片放在哪个地方合适，若是再配合动态加载，效果会特别不好，所以只能通过JS来实现瀑布流。</p>
-<p>那么这里用图片来分析一下我们想要的瀑布流是什么样的。</p>
-<h3 id="瀑布流的位置分析图解"><strong>瀑布流的位置分析图解</strong></h3>
-<p>如下方图片。假设一排放5张图片。当第一排排满足够多的等宽图片时，显示的是这样的。那么假如我们要放第6张图片的时候，应该放在什么位置呢？<br>
-<img src="http://api.fly63.com/vue_blog/public/Uploads/20190928/5d8efe5649cb3.jpg"></p>
-<p>如果按照我们的正常逻辑来想，应该是放在第一张图片下面，依次水平排列过去（如下图）</p>
-<img src="http://api.fly63.com/vue_blog/public/Uploads/20190928/5d8efe5cebcf5.jpg">
-<p>但现实并非如此！在瀑布流中，从第2行开始，接下去的每一张图片都会放在上行中高度最低的那一列图片下方。（如下图）</p>
-<img src="http://api.fly63.com/vue_blog/public/Uploads/20190928/5d8efe641953c.jpg">
-<p>为什么呢？因为放置它之前，这一列的高度为所有列中最小，所以会放置在这个地方。<br>
-那么如果再继续放置下去，第七张图片应该放在第三列图片下方，以此类推。</p>
-<Img src="http://api.fly63.com/vue_blog/public/Uploads/20190928/5d8efe7901860.jpg" />
-<p>所以每次加载图片时，会需要判断哪一列的图片累计的高度最小，那么下一张图片就放在哪一列，即瀑布流算法去判断图片的确定位置。</p>
-<p><strong>JS代码实现</strong></p>
-<p>实现思路：</p>
-<pre><code>　　设定每一列图片的宽度和间距
-　　获取当前窗口的总宽度，从而根据图片宽度去旁段分成几列
-　　获取所有图片元素，定义一个空数组来保存高度
-　　遍历所有容器，开始判断　　当页面加载完成，或页面宽度发生变化时，调用函数。
-如果当前处于第一行时： 直接设置图片位置【 即 top为间距的大小，left为（当前图片的宽度+间距） * 当前图片的值+间距大小 】，并保存当前元素高度。
-如果当前不处于第一行时：进行高度对比，通过遍历循环，拿到最小高度和相对应的索引，设置图片位置【 即 top为最小高度值+间距*2，left为 （当前图片的宽度+间距） * 索引 值+间距大小）】，并修改当前索引的高度为当前元素高度。
-　　当页面加载完成，或页面宽度发生变化时，调用函数。
-</code></pre>
-<p>代码实现</p>
-<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
-    // 定义瀑布流算法函数
-    function fall() {
-        const minGap = 20; // 最小间距，让每一列的最小空隙可以自定义，避免太过拥挤的情况发生。但是，会通过计算得到真实的间距。
-        const itemWidth = 300; // 每一项的宽度，即当前每一个图片容器的宽度。保证每一列都是等宽不等高的。
-        const scrollBarWidth = getScrollbarWidth();    // 获取滚动条的宽度
-        const pageWidth = window.innerWidth - scrollBarWidth; // 获取当前页面的宽度 = window.innerWidth - 滚动条的宽度
-        const column = Math.floor(pageWidth / (itemWidth + minGap)); // 实际列数=页面宽度/(图片宽度+最小间距)
-        const gap = (pageWidth - itemWidth * column) / column/2; // 计算真实间距 = (页面宽度- 图片宽度*实际列数)/实际列数/2
-        const items = document.querySelectorAll('img'); // 获取所有的外层元素
-        const heightArr = []; // 定义一个空数组，保存最低高度。
         
-        // 获取滚动条的宽度
-        function getScrollbarWidth() {
-            const oDiv = document.createElement('div');//创建一个div
-            // 给div设置样式。随便定义宽高，只要能获取到滚动条就可以
-            oDiv.style.cssText = `width: 50px;height: 50px;overflowY: scroll;` 
-            document.body.appendChild(oDiv);//把div添加到body中
-            const scrollbarWidth = oDiv.offsetWidth - oDiv.clientWidth;// 使最大宽度和可视宽度相减，获得到滚动条宽度。
-            oDiv.remove();//移除创建的div
-            return scrollbarWidth;//返回滚动条宽度
-        }
-        
-        
-        for (let i = 0; i &lt; items.length; i++) {
-            // 遍历所有的外层容器
-            const height = items[i].offsetHeight;
-            // 如果当前处在第一行
-            if (i &lt; column) {
-                // 直接设置元素距离上部的位置和距离左边的距离。
-                items[i].style.cssText = `top: ${gap}px;left: ${(itemWidth + gap) * i + gap}px`;
-                // 保存当前元素的高度。
-                heightArr.push(height);
-            } else {
-                // 不是第一行的话，就进行比对。
-                let minHeight = heightArr[0]; // 先保存第一项的高度
-                let minIndex = 0; // 保存第一项的索引值
-                for (let j = 0; j &lt; heightArr.length; j++) {
-                    // 通过循环遍历比对，拿到最小值和最小值的索引。
-                    if (minHeight &gt; heightArr[j]) {
-                        minHeight = heightArr[j];
-                        minIndex = j;
-                    }
-                }
-                // 通过最小值为当前元素设置top值，通过索引为当前元素设置left值。
-                items[i].style.cssText = `top: ${minHeight + gap *2}px; left: ${(itemWidth + gap) * minIndex + gap}px`;
-                // 并修改当前索引的高度为当前元素的高度
-                heightArr[minIndex] = minHeight + gap + height;
-            }
-        }
-    }
-    // 页面加载完成调用一次。
-    window.onload = fall;
-    // 页面尺寸发生改变再次调用。
-    window.onresize = fall;
-&lt;/script&gt;
-</code></pre>
-<p>最终效果图：</p>
-<img src="http://api.fly63.com/vue_blog/public/Uploads/20190928/5d8efe882b81c.jpg">
-<h2 id="总结瀑布流布局原理"><strong>总结瀑布流布局原理</strong></h2>
-<ul>
-<li>设置图片宽度一致</li>
-<li>根据浏览器宽度以及每列宽度计算出列表个数，列表默认0</li>
-<li>当图片加载完成，所有图片依次放置在最小的列数下面</li>
-<li>父容器高度取列表数组的最大值</li>
-</ul>
-<h2 id="引申知识点"><strong>引申知识点</strong></h2>
-
       </div>
       <div class="text-gray-400 text-sm font-light">2019-10-10 / 10 min read</div>
     </div>
   </section>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${2 * 0.2}s` }">
+  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
     
       <a href="https://yleexie.github.io/post/ckt4Y7_N1" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
         <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3497890108,3867706537&amp;fm=26&amp;gp=0.jpg'">
@@ -331,192 +140,13 @@
         <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">整理经常在H5移动端开发遇到的知识</h2>
       </a>
       <div class="post-abstract text-gray-700 font-light my-4">
-        <blockquote>
-<p>viewport、强制浏览器全屏、IOS的Web APP模式、可点击元素出现阴影（这个我觉得真没必要去掉，用户点击是需要反馈的，而这个背景色刚刚好提供了一种反馈）等等，太多啦，这些相信大家百度一下就可以查到很多资料</p>
-</blockquote>
-<p>本篇文章主要是讲一些其他的或者优化手段。内容不多😀😀</p>
-<p><strong>1. 弹出数字键盘</strong></p>
-<pre><code>&lt;!-- 有&quot;#&quot; &quot;*&quot;符号输入 --&gt;
-&lt;input type=&quot;tel&quot;&gt;
-
-&lt;!-- 纯数字 --&gt;
-&lt;input pattern=&quot;\d*&quot;&gt;
-安卓跟IOS的表现形式应该不一样，大家可以自己试试。当运用了正则pattern后，就不用关注input的类型了
-</code></pre>
-<p><strong>1. 调用系统的某些功能</strong></p>
-<pre><code>&lt;!-- 拨号 --&gt;
-&lt;a href=&quot;tel:10086&quot;&gt;打电话给: 10086&lt;/a&gt;
-
-&lt;!-- 发送短信 --&gt;
-&lt;a href=&quot;sms:10086&quot;&gt;发短信给: 10086&lt;/a&gt;
-
-&lt;!-- 发送邮件 --&gt;
-&lt;a href=&quot;mailto:839626987@qq.com&quot;&gt;发邮件给：839626987@qq.com&lt;/a&gt;
-
-&lt;!-- 选择照片或者拍摄照片 --&gt;
-&lt;input type=&quot;file&quot; accept=&quot;image/*&quot;&gt;
-
-&lt;!-- 选择视频或者拍摄视频 --&gt;
-&lt;input type=&quot;file&quot; accept=&quot;video/*&quot;&gt;
-
-&lt;!-- 多选 --&gt;
-&lt;input type=&quot;file&quot; multiple&gt;
-</code></pre>
-<p><strong>3. 打开原生应用</strong></p>
-<pre><code>&lt;a href=&quot;weixin://&quot;&gt;打开微信&lt;/a&gt;
-&lt;a href=&quot;alipays://&quot;&gt;打开支付宝&lt;/a&gt;
-&lt;a href=&quot;alipays://platformapi/startapp?saId=10000007&quot;&gt;打开支付宝的扫一扫功能&lt;/a&gt;
-&lt;a href=&quot;alipays://platformapi/startapp?appId=60000002&quot;&gt;打开支付宝的蚂蚁森林&lt;/a&gt;
-</code></pre>
-<p>这种方式叫做URL Scheme，是一种协议，一般用来访问APP或者APP中的某个功能/页面（如唤醒APP后打开指定页面或者使用某些功能）</p>
-<p>URL Scheme的基本格式如下：</p>
-<pre><code>     行为(应用的某个功能/页面)    
-            |
-scheme://[path][?query]
-   |               |
-应用标识       功能需要的参数
-</code></pre>
-<p>一般是由APP开发者自己定义，比如规定一些参数或者路径让其他开发者来访问，就像上面的例子</p>
-<p>注意事项：</p>
-<pre><code>唤醒APP的条件是你的手机已经安装了该APP
-某些浏览器会禁用此协议，比如微信内部浏览器（除非开了白名单）
-</code></pre>
-<p>后面应该会专门写一篇文章用来探讨唤醒APP</p>
-<p><strong>1. 解决active伪类失效</strong><br>
-<code>&lt;body ontouchstart&gt;&lt;/body&gt;</code><br>
-给body注册一个空事件即可</p>
-<p><strong>5. 忽略自动识别</strong></p>
-<pre><code>&lt;!-- 忽略浏览器自动识别数字为电话号码 --&gt;
-&lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;
-
-&lt;!-- 忽略浏览器自动识别邮箱账号 --&gt;
-&lt;meta name=&quot;format-detection&quot; content=&quot;email=no&quot;&gt;
-当页面上的内容包含了手机号/邮箱等，会自动转换成可点击的链接
-</code></pre>
-<p>比如你有如下代码：</p>
-<p><code>&lt;p&gt;13192733603&lt;/P&gt;</code><br>
-但是有些浏览器会识别为手机，并且可以点击拨号</p>
-<p><strong>6. 解决input失焦后页面没有回弹</strong><br>
-一般出现在IOS设备中的微信内部浏览器，出现的条件为：</p>
-<p>页面高度过小<br>
-聚焦时，页面需要往上移动的时候<br>
-所以一般input在页面上方或者顶部都不会出现无法回弹</p>
-<p>解决办法为，在聚焦时，获取当前滚动条高度，然后失焦时，赋值之前获取的高度：</p>
-<pre><code>&lt;template&gt;
-  &lt;input type=&quot;text&quot; @focus=&quot;focus&quot; @blur=&quot;blur&quot;&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-  export default {
-    data() {
-      return {
-        scrollTop: 0
-      }
-    },
-    
-    methods: {
-      focus() {
-        this.scrollTop = document.scrollingElement.scrollTop;
-      },
-      
-      blur() {
-        document.scrollingElement.scrollTo(0, this.scrollTop);
-      }
-    }
-  }
-&lt;/script&gt;
-</code></pre>
-<p><strong>6. 禁止长按</strong><br>
-以上行为可以总结成这几个（每个手机以及浏览器的表现形式不一样）：长按图片保存、长按选择文字、长按链接/手机号/邮箱时呼出菜单。</p>
-<p>想要禁止这些浏览器的默认行为，可以使用以下CSS：</p>
-<pre><code>// 禁止长按图片保存
-img {
-  -webkit-touch-callout: none;
-  pointer-events: none; // 像微信浏览器还是无法禁止，加上这行样式即可
-}
-
-// 禁止长按选择文字
-div {
-  -webkit-user-select: none;
-}
-
-// 禁止长按呼出菜单
-div {
-  -webkit-touch-callout: none;
-}
-</code></pre>
-<p><strong>7. 滑动不顺畅，粘手</strong><br>
-一般出现在IOS设备中，自定义盒子使用了overflow: auto || scroll后出现的情况。</p>
-<p>优化代码：</p>
-<pre><code>div {
-  -webkit-overflow-scrolling: touch;
-}
-</code></pre>
-<p><strong>8. 屏幕旋转为横屏时，字体大小会变</strong><br>
-具体出现的情况不明，有时候有有时候没有，欢迎指出。</p>
-<p>优化代码：</p>
-<pre><code>* {
-  -webkit-text-size-adjust: 100%;
-}
-</code></pre>
-<p><strong>9. 最简单的rem自适应</strong><br>
-大家都知道，rem的值是根据根元素的字体大小相对计算的，但是我们每个设备的大小不一样，所以根元素的字体大小要动态设置</p>
-<pre><code>html {
- font-size: calc(100vw / 3.75);
-}
-
-body {
-  font-size: .14rem;
-}
-</code></pre>
-<p>像我一般的话，直接搞lib-flexible、postcss-pxtorem就完事啦！</p>
-<p><strong>10. 滑动穿透</strong><br>
-当你想在出现遮罩的时候，锁住用户的滚动行为，你可以这么做。</p>
-<p>假设HTML结构如下：</p>
-<pre><code>&lt;div class=&quot;mask&quot;&gt;
-  &lt;div class=&quot;content&quot;&gt;我是弹框&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p>CSS样式如下：</p>
-<pre><code>.mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgba($color: #333, $alpha: .6);
-
-  .content {
-    padding: 20px;
-    background-color: #fff;
-    width: 300px;
-  }
-}
-</code></pre>
-<p>可以看到，当在遮罩上滑动的时候，是会穿透到父节点的，最简单的办法就是阻住默认行为：</p>
-<pre><code>document.querySelector(&quot;.mask&quot;).addEventListener(&quot;touchmove&quot;, event =&gt; {
-  event.preventDefault();
-});
-</code></pre>
-<p>如果在vue中，你可以这么写：</p>
-<pre><code>&lt;div class=&quot;mask&quot; @touchumove.prevent&gt;&lt;/div&gt;
-</code></pre>
-<p>如果.content也有滚动条，那么只要阻止遮罩本身就行：</p>
-<pre><code>document.querySelector(&quot;.mask&quot;).addEventListener(&quot;touchmove&quot;, event =&gt; {
-  if (event.target.classList.contains(&quot;mask&quot;)) event.preventDefault();
-});
-</code></pre>
-<p>或者：</p>
-
+        
       </div>
       <div class="text-gray-400 text-sm font-light">2019-10-10 / 7 min read</div>
     </div>
   </section>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${3 * 0.2}s` }">
+  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${2 * 0.2}s` }">
     
       <a href="https://yleexie.github.io/post/bksGIXizU" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
         <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2205610465,2865676578&amp;fm=26&amp;gp=0.jpg'">
@@ -534,7 +164,7 @@ body {
     </div>
   </section>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${4 * 0.2}s` }">
+  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${3 * 0.2}s` }">
     
       <a href="https://yleexie.github.io/post/qGUCTCcrs" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
         <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'data:image/jpeg;base64,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'">
@@ -552,7 +182,7 @@ body {
     </div>
   </section>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${5 * 0.2}s` }">
+  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${4 * 0.2}s` }">
     
       <a href="https://yleexie.github.io/post/git-chang-yong-zhi-ling-da-quan" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
         <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png'">
