@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yleexie.github.io</id>
-    <title>源代码</title>
-    <updated>2019-10-10T08:04:05.829Z</updated>
+    <title>代码猿</title>
+    <updated>2019-10-10T08:07:44.265Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yleexie.github.io"/>
     <link rel="self" href="https://yleexie.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://yleexie.github.io/images/avatar.png</logo>
     <icon>https://yleexie.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, 源代码</rights>
+    <rights>All rights reserved 2019, 代码猿</rights>
 </feed>
