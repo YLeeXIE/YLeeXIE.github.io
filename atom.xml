@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yleexie.github.io</id>
     <title>代码猿</title>
-    <updated>2019-10-10T16:55:38.127Z</updated>
+    <updated>2019-10-10T17:45:31.346Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yleexie.github.io"/>
     <link rel="self" href="https://yleexie.github.io/atom.xml"/>
@@ -11,6 +11,34 @@
     <logo>https://yleexie.github.io/images/avatar.png</logo>
     <icon>https://yleexie.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 代码猿</rights>
+    <entry>
+        <title type="html"><![CDATA[Js同步，异步和事件轮询]]></title>
+        <id>https://yleexie.github.io/post/LQai2xQCM</id>
+        <link href="https://yleexie.github.io/post/LQai2xQCM">
+        </link>
+        <updated>2019-10-10T17:21:07.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[领略原生 JavaScript ES6~ES10 的魅力]]></title>
+        <id>https://yleexie.github.io/post/QLj0fqqXw</id>
+        <link href="https://yleexie.github.io/post/QLj0fqqXw">
+        </link>
+        <updated>2019-10-10T17:14:46.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Js中常用事件及说明]]></title>
+        <id>https://yleexie.github.io/post/MIx6sOsw3</id>
+        <link href="https://yleexie.github.io/post/MIx6sOsw3">
+        </link>
+        <updated>2019-10-10T17:05:45.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Node.js的内存分配和垃圾回收]]></title>
+        <id>https://yleexie.github.io/post/TQG2fMrLX</id>
+        <link href="https://yleexie.github.io/post/TQG2fMrLX">
+        </link>
+        <updated>2019-10-10T17:00:29.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[瀑布流的布局原理分析（纯CSS瀑布流与JS瀑布流）]]></title>
         <id>https://yleexie.github.io/post/E1jNUuZ9D</id>
