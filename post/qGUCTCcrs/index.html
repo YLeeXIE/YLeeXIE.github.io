@@ -1,0 +1,423 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>代码猿</title>
+<meta name="description" content="一入编程深似海
+从此妹子是路人" />
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1570723061952">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://yleexie.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="代码猿 - Atom Feed" href="https://yleexie.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://yleexie.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1570723061952" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%98%B6%E6%AE%B5">初始化阶段</a></li>
+<li><a href="#%E4%BE%9D%E8%B5%96%E6%94%B6%E9%9B%86%E9%98%B6%E6%AE%B5">依赖收集阶段</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"><img src="https://cdn.img.wenhairu.com/images/2019/10/10/8hMaB.png" alt="8hMaB.png" border="0">&nbsp;&nbsp;代码猿</div>
+    <!-- <a class="rss" href="https://yleexie.github.io/atom.xml" target="_blank">RSS</a> -->
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">一张图理清 Vue 3.0 的响应式系统</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2019-10-10 / 7 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="data:image/jpeg;base64,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" alt="">
+        
+        <div class="post-content yue">
+          <p>随着 Vue 3.0 Pre Alpha 版本的公布，我们得以一窥其源码的实现。Vue 最巧妙的特性之一是其响应式系统，而我们也能够在仓库的 packages/reactivity 模块下找到对应的实现。虽然源码的代码量不多，网上的分析文章也有一堆，但是要想清晰地理解响应式原理的具体实现过程，还是挺费脑筋的事情。经过一天的研究和整理，我把其响应式系统的原理总结成了一张图，而本文也将围绕这张图去讲述具体的实现过程。</p>
+<img src="http://api.fly63.com/vue_blog/public/Uploads/20191009/5d9ddaaf04bba.jpg">
+<p>一个基本的例子<br>
+Vue 3.0 的响应式系统是独立的模块，可以完全脱离 Vue 而使用，所以我们在 clone 了源码下来以后，可以直接在 packages/reactivity 模块下调试。</p>
+<p>在项目根目录运行 yarn dev reactivity，然后进入 packages/reactivity 目录找到产出的 dist/reactivity.global.js 文件。</p>
+<p>新建一个 index.html，写入如下代码：</p>
+<pre><code>&lt;script src=&quot;./dist/reactivity.global.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+const { reactive, effect } = VueObserver
+
+const origin = {
+  count: 0
+}
+const state = reactive(origin)
+
+const fn = () =&gt; {
+  const count = state.count
+  console.log(`set count to ${count}`)
+}
+effect(fn)
+&lt;/script&gt;
+</code></pre>
+<p>在浏览器打开该文件，于控制台执行 state.count++，便可看到输出 set count to 1。</p>
+<p>在上述的例子中，我们使用 reactive() 函数把 origin 对象转化成了 Proxy 对象 state；使用 effect() 函数把 fn()作为响应式回调。当 state.count 发生变化时，便触发了 fn()。接下来我们将以这个例子结合上文的流程图，来讲解这套响应式系统是怎么运行的。</p>
+<h3 id="初始化阶段">初始化阶段</h3>
+<img src="http://api.fly63.com/vue_blog/public/Uploads/20191009/5d9ddac1d7481.jpg" />
+在初始化阶段，主要做了两件事。
+<pre><code>把 origin 对象转化成响应式的 Proxy 对象 state。
+把函数 fn() 作为一个响应式的 effect 函数。
+</code></pre>
+<p>首先我们来分析第一件事。</p>
+<p>大家都知道，Vue 3.0 使用了 Proxy 来代替之前的 Object.defineProperty()，改写了对象的 getter/setter，完成依赖收集和响应触发。但是在这一阶段中，我们暂时先不管它是如何改写对象的 getter/setter 的，这个在后续的”依赖收集阶段“会详细说明。为了简单起见，我们可以把这部分的内容浓缩成一个只有两行代码的 reactive() 函数：</p>
+<pre><code>export function reactive(target) {
+  const observed = new Proxy(target, handler)
+  return observed
+}
+</code></pre>
+<blockquote>
+<p>完整代码在<a href="https://github.com/jrainlau/tiny-reactive/blob/master/src/reactive.js">reactive.js</a>。这里的 handler 就是改造 getter/setter 的关键，我们放到后文讲解。<br>
+接下来我们分析第二件事。</p>
+</blockquote>
+<p>当一个普通的函数 fn() 被 effect() 包裹之后，就会变成一个响应式的 effect 函数，而 fn() 也会被立即执行一次。</p>
+<p>** 由于在 fn() 里面有引用到 Proxy 对象的属性，所以这一步会触发对象的 getter，从而启动依赖收集。**</p>
+<p>除此之外，这个 effect 函数也会被压入一个名为”activeReactiveEffectStack“（此处为 effectStack）的栈中，供后续依赖收集的时候使用。</p>
+<p>来看看代码（完成代码请看 <a href="https://github.com/jrainlau/tiny-reactive/blob/master/src/effect.js#L47-L65">effect.js</a>）：</p>
+<pre><code>export function effect (fn) {
+  // 构造一个 effect
+  const effect = function effect(...args) {
+    return run(effect, fn, args)
+  }
+  // 立即执行一次
+  effect()
+  return effect
+}
+
+export function run(effect, fn, args) {
+  if (effectStack.indexOf(effect) === -1) {
+    try {
+      // 往池子里放入当前 effect
+      effectStack.push(effect)
+      // 立即执行一遍 fn()
+      // fn() 执行过程会完成依赖收集，会用到 effect
+      return fn(...args)
+    } finally {
+      // 完成依赖收集后从池子中扔掉这个 effect
+      effectStack.pop()
+    }
+  }
+}
+</code></pre>
+<p>至此，初始化阶段已经完成。接下来就是整个系统最关键的一步——依赖收集阶段。</p>
+<h3 id="依赖收集阶段">依赖收集阶段</h3>
+<img src="http://api.fly63.com/vue_blog/public/Uploads/20191009/5d9ddacde6c28.jpg" />
+<p>这个阶段的触发时机，就是在 effect 被立即执行，其内部的 fn() 触发了 Proxy 对象的 getter 的时候。简单来说，只要执行到类似 state.count 的语句，就会触发 state 的 getter。</p>
+<p>依赖收集阶段最重要的目的，就是建立一份”依赖收集表“，也就是图示的”targetMap&quot;。targetMap 是一个 WeakMap，其 key 值是当前的 Proxy 对象 state，而 value 则是该对象所对应的 depsMap。</p>
+<p>depsMap 是一个 Map，key 值为触发 getter 时的属性值（此处为 count），而 value 则是触发过该属性值所对应的各个 effect。</p>
+<p>还是有点绕？那么我们再举个例子。假设有个 Proxy 对象和 effect 如下：</p>
+<pre><code>const state = reactive({
+  count: 0,
+  age: 18
+})
+
+const effect1 = effect(() =&gt; {
+  console.log('effect1: ' + state.count)
+})
+
+const effect2 = effect(() =&gt; {
+  console.log('effect2: ' + state.age)
+})
+
+const effect3 = effect(() =&gt; {
+  console.log('effect3: ' + state.count, state.age)
+})
+</code></pre>
+<p>那么这里的 targetMap 应该为这个样子：<br>
+<img src="http://api.fly63.com/vue_blog/public/Uploads/20191009/5d9ddad5963db.jpg" /></p>
+<p>这样，<code>{ target -&gt; key -&gt; dep }</code> 的对应关系就建立起来了，依赖收集也就完成了。代码如下：</p>
+<pre><code>export function track (target, operationType, key) {
+  const effect = effectStack[effectStack.length - 1]
+  if (effect) {
+    let depsMap = targetMap.get(target)
+    if (depsMap === void 0) {
+      targetMap.set(target, (depsMap = new Map()))
+    }
+
+    let dep = depsMap.get(key)
+    if (dep === void 0) {
+      depsMap.set(key, (dep = new Set()))
+    }
+
+    if (!dep.has(effect)) {
+      dep.add(effect)
+    }
+  }
+}
+</code></pre>
+<p>弄明白依赖收集表 targetMap 是非常重要的，因为这是整个响应式系统核心中的核心。</p>
+<img src="http://api.fly63.com/vue_blog/public/Uploads/20191009/5d9ddae0d978b.jpg" />
+<p>响应阶段<br>
+回顾上一章节的例子，我们得到了一个 <code>{ count: 0, age: 18 }</code> 的 Proxy，并构造了三个 effect。在控制台上看看效果：</p>
+<p>效果符合预期，那么它是怎么实现的呢？首先来看看这个阶段的原理图：</p>
+<img src="http://api.fly63.com/vue_blog/public/Uploads/20191009/5d9ddae79a427.jpg" />
+<p>当修改对象的某个属性值的时候，会触发对应的 setter。</p>
+<p>setter 里面的 trigger() 函数会从依赖收集表里找到当前属性对应的各个 dep，然后把它们推入到 effects 和 computedEffects（计算属性） 队列中，最后通过 scheduleRun() 挨个执行里面的 effect。</p>
+<p>由于已经建立了依赖收集表，所以要找到属性所对应的 dep 也就轻而易举了，可以看看具体的代码实现：</p>
+<pre><code>export function trigger (target, operationType, key) {
+  // 取得对应的 depsMap
+  const depsMap = targetMap.get(target)
+  if (depsMap === void 0) {
+    return
+  }
+  // 取得对应的各个 dep
+  const effects = new Set()
+  if (key !== void 0) {
+    const dep = depsMap.get(key)
+    dep &amp;&amp; dep.forEach(effect =&gt; {
+      effects.add(effect)
+    })
+  }
+  // 简化版 scheduleRun，挨个执行 effect
+  effects.forEach(effect =&gt; {
+    effect()
+  })
+}
+</code></pre>
+<blockquote>
+<p>这里的代码没有处理诸如数组的 length 被修改的一些特殊情况，感兴趣的读者可以查看 <a href="https://github.com/vuejs/vue-next/blob/master/packages/reactivity/src/effect.ts#L152-L188">vue-next 对应的源码</a>，或者<a href="https://juejin.im/post/5d99be7c6fb9a04e1e7baa34?utm_source=gold_browser_extension#heading-2">这篇文章</a>，看看这些情况都是怎么处理的。</p>
+</blockquote>
+<p>至此，响应式阶段完成。</p>
+<p>总结<br>
+阅读源码的过程充满了挑战性，但同时也常常被 Vue 的一些实现思路给惊艳到，收获良多。本文按照响应式系统的运行过程，划分了”初始化“，”依赖收集“和”响应式“三个阶段，分别阐述了各个阶段所做的事情，应该能够较好地帮助读者理解其核心思路。</p>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/uYf4HiISv">
+            <span class="flex-auto">Vue</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/yufYm2xwV">
+            <span class="flex-auto">Proxy</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://yleexie.github.io/post/bksGIXizU">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  8个实用Python的脚本，收藏备用
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://yleexie.github.io/post/git-chang-yong-zhi-ling-da-quan">
+                <h3 class="post-title">
+                  Git常用指令大全
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '26e86b8acd36313b1772',
+    clientSecret: 'c7fd619e3cde059a1e0815d515d06c0af2f6a5ff',
+    repo: 'YLeeXIE.github.io',
+    owner: 'YLeeXIE',
+    admin: ['YLeeXIE'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://yleexie.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
