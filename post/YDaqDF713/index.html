@@ -5,7 +5,7 @@
 <title>代码猿</title>
 <meta name="description" content="一入编程深似海
 从此妹子是路人" />
-<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1571467584349">
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1571471356037">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -25,7 +25,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://yleexie.github.io">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1571467584349" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1571471356037" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
       </div>
@@ -99,14 +99,208 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">JavaScript常见设计模式整理</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2019-10-19 / 4 min read
+          2019-10-19 / 16 min read
         </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3415800167,1838052247&amp;fm=11&amp;gp=0.jpg" alt="">
         
         <div class="post-content yue">
           <h1 id="装饰器模式">装饰器模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>动态的给函数赋能</li>
+<li>增强普通对象的功能，按照顺序进行装饰。</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>react-rudex connect函数</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<pre><code>//装饰者模式
+//增加普通对象的功能
+
+function Sale(price) {
+    this.price = price;
+    this.decorators_list = [];
+}
+
+Sale.decorators = {};
+Sale.decorators.fedtax = {
+    getPrice: function (price) {
+        return price + price * 5 / 100;
+    }
+};
+Sale.decorators.money = {
+    getPrice: function (price) {
+        return '$' + price.toFixed(2);
+    }
+};
+
+Sale.prototype.decorate = function (decorator) {
+    this.decorators_list.push(decorator);  
+};
+
+Sale.prototype.getPrice = function () {
+    var price = this.price,
+    i,
+    len = this.decorators_list.length,
+    name;
+    for (i = 0; i &lt; len; i++) {
+        name = this.decorators_list[i];
+        price = Sale.decorators[name].getPrice(price);
+    }
+    return price;
+};
+
+var sale = new Sale(100);
+sale.decorate('fedtax');
+sale.getPrice();  //105
+sale.decorate('money');
+sale.getPrice();  //$105.00
+</code></pre>
+<pre><code> //    生活中的例子: 天气冷了, 就添加衣服来保暖；天气热了, 就将外套脱下；这个例子很形象地含盖了装饰器的神韵, 随着天气的冷暖变化, 衣服可以动态的穿上脱下。
+let wear = function() {
+  console.log('穿上第一件衣服')
+}
+
+const _wear1 = wear
+
+wear = function() {
+  _wear1()
+  console.log('穿上第二件衣服')
+}
+
+const _wear2 = wear
+
+wear = function() {
+  _wear2()
+  console.log('穿上第三件衣服')
+}
+
+wear()
+
+// 穿上第一件衣服
+// 穿上第二件衣服
+// 穿上第三件衣服
+</code></pre>
+<p>这种方式有以下缺点: 1: 临时变量会变得越来越多；2: this 指向有时会出错</p>
+<pre><code>// AOP装饰函数
+// 前置代码
+Function.prototype.before = function(fn) {
+  const self = this
+  return function() {
+    fn.apply(new(self), arguments)  // https://github.com/MuYunyun/blog/pull/30#event-1817065820
+    return self.apply(new(self), arguments)
+  }
+}
+
+// 后置代码
+Function.prototype.after = function(fn) {
+  const self = this
+  return function() {
+    self.apply(new(self), arguments)
+    return fn.apply(new(self), arguments)
+  }
+}
+
+</code></pre>
+<p>用后置代码来实验下上面穿衣服的 demo,</p>
+<pre><code>const wear1 = function() {
+  console.log('穿上第一件衣服')
+}
+
+const wear2 = function() {
+  console.log('穿上第二件衣服')
+}
+
+const wear3 = function() {
+  console.log('穿上第三件衣服')
+}
+
+const wear = wear1.after(wear2).after(wear3)
+wear()
+
+// 穿上第一件衣服
+// 穿上第二件衣服
+// 穿上第三件衣服
+</code></pre>
+<p>但这样子有时会污染原生函数, 可以做点通变</p>
+<pre><code>const after = function(fn, afterFn) {
+  return function() {
+    fn.apply(this, arguments)
+    afterFn.apply(this, arguments)
+  }
+}
+
+const wear = after(after(wear1, wear2), wear3)
+wear()
+</code></pre>
 <h1 id="发布-订阅模式">发布-订阅模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>发布者中保存着一份订阅者的列表，当发布者的状态发生改变的时候就主动向订阅者发出通知</li>
+<li>PubSub</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>瀑布流库</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<p><a href="https://github.com/MuYunyun/waterfall/blob/0f229c1a2881d26166b92aa746b7f892af59c28f/waterfall.js#L8">瀑布流库实现代码</a></p>
+<pre><code>
+//发布订阅模式
+//当发生一个感兴趣的事件时，将该事件通告给所有订阅者
+//形成对象之间的松散耦合
+
+function EventTarget() {
+    this.handlers = {};
+}
+EventTarget.prototype = {
+    constructor: EventTarget,
+    addHandler: function (type, handler) {
+        if (typeof this.handlers[type] == &quot;undefined&quot;) {
+            this.handlers[type] = [];
+        }
+        this.handlers[type].push(handler);
+    },
+    fire: function (event) {
+        if (!event.target) {
+            event.target = this;
+        }
+        if (this.handlers[event.type] instanceof Array) {
+            var handlers = this.handlers[event.type];
+            for (var i = 0, len = handlers.length; i &lt; len; i++) {
+                handlers[i](event);
+            }
+        }
+    },
+    removeHandler: function (type, handler) {
+        if (this.handlers[type] instanceof Array) {
+            var handlers = this.handlers[type];
+            for (var i = 0, len = handlers.length; i &lt; len; i++) {
+                if (handlers[i] === handler) {
+                    break;
+                }
+            }
+            handlers.splice(i, 1);
+        }
+    }
+};
+
+var publisher = new EventTarget();  //定义发布者
+//向发布者中注册订阅者
+publisher.addHandler('call1',function () {
+    console.log('call1');
+});
+publisher.addHandler('call1',function () {
+    console.log('call1 again');
+});
+//发布者发布消息
+publisher.fire({type: 'call1'});  //call1 call1 again
+
+</code></pre>
 <h1 id="单例模式">单例模式</h1>
-<p>👉  <strong>条件</strong></p>
+<p>👉  <strong>描述</strong></p>
 <ul>
 <li>保证一个对象只有一个实例、第二次创建的实例和第一次创建的完全一样(一个类只能构造出唯一的实例)</li>
 <li>可以全局访问</li>
@@ -146,9 +340,9 @@ console.log(p1 === p2);  //true
 
 </code></pre>
 <h1 id="策略模式">策略模式</h1>
-<p>👉  <strong>条件</strong></p>
+<p>👉  <strong>描述</strong></p>
 <ul>
-<li>根据不同命令命中不同算法、可以避免使用多重条件语句</li>
+<li>根据不同命令命中不同算法、可以避免使用多重描述语句</li>
 </ul>
 <p>👉  <strong>场景</strong></p>
 <ul>
@@ -201,7 +395,7 @@ calculateBonus(A, 10000) // 30000
 
 </code></pre>
 <h1 id="代理模式">代理模式</h1>
-<p>👉  <strong>条件</strong></p>
+<p>👉  <strong>描述</strong></p>
 <ul>
 <li>代理对象和本身对象具有一致的接口、在 JS 中最常用的为虚拟代理和缓存代理。</li>
 <li>通过包装一个对象以控制对它的访问、ES6中的Proxy就是通过代理扩展对象功能</li>
@@ -300,7 +494,7 @@ proxyMult(1, 2, 3, 4) // 24
 
 </code></pre>
 <h1 id="迭代器模式">迭代器模式</h1>
-<p>👉  <strong>条件</strong></p>
+<p>👉  <strong>描述</strong></p>
 <ul>
 <li>为遍历一个数据结构提供方法</li>
 <li>能获取聚合对象的顺序和元素</li>
@@ -308,20 +502,553 @@ proxyMult(1, 2, 3, 4) // 24
 <p>👉  <strong>场景</strong></p>
 <ul>
 <li>遍历数据结构</li>
+<li>each([1,2,3],callback)</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
+<pre><code>//迭代器模式
+//遍历某一个数据结构，这里以数组为例
+
+var iterator = (function () {
+    var index = 0,
+        data = [1, 2, 3, 4, 5],
+        len = data.length;
+    return {
+        next: function () {
+            if (!this.hasNext()) {
+                return null;
+            }
+            return data[index++];
+        },
+        hasNext: function () {
+            return index &lt; len;
+        }
+    };
+}());
+
+while(iterator.hasNext()) {
+    console.log(iterator.next());
+}
+</code></pre>
 <h1 id="命令模式">命令模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>不同对象间约定好相应的接口</li>
+<li>命令模式与策略模式有些类似, 在 JavaScript 中它们都是隐式的。</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>按钮和命令的分离</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<pre><code>const setCommand = function(button, command) {
+  button.onClick = function() {
+    command.excute()
+  }
+}
+
+// --------------------  上面的界面逻辑由A完成, 下面的由B完成
+
+const menu = {
+  updateMenu: function() {
+    console.log('更新菜单')
+  },
+}
+
+const UpdateCommand = function(receive) {
+  return {
+    excute: receive.updateMenu,
+  }
+}
+
+const updateCommand = UpdateCommand(menu) // 创建命令
+
+const button1 = document.getElementById('button1')
+setCommand(button1, updateCommand)
+</code></pre>
 <h1 id="组合模式">组合模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>组合模式在对象间形成树形结构;</li>
+<li>组合模式中基本对象和组合对象被一致对待;</li>
+<li>无须关心对象有多少层, 调用时只需在根部进行调用;</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>扫描文件夹</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<pre><code>//    命令模式和组合模式的实现
+const MacroCommand = function() {
+  return {
+    lists: [],
+    add: function(task) {
+      this.lists.push(task)
+    },
+    excute: function() { // ①: 组合对象调用这里的 excute,
+      for (let i = 0; i &lt; this.lists.length; i++) {
+        this.lists[i].excute()
+      }
+    },
+  }
+}
+
+const command1 = MacroCommand() // 基本对象
+
+command1.add({
+  excute: () =&gt; console.log('煮咖啡') // ②: 基本对象调用这里的 excute,
+})
+
+const command2 = MacroCommand() // 组合对象
+
+command2.add({
+  excute: () =&gt; console.log('打开电视')
+})
+
+command2.add({
+  excute: () =&gt; console.log('打开音响')
+})
+
+const command3 = MacroCommand()
+
+command3.add({
+  excute: () =&gt; console.log('打开空调')
+})
+
+command3.add({
+  excute: () =&gt; console.log('打开电脑')
+})
+
+const macroCommand = MacroCommand()
+macroCommand.add(command1)
+macroCommand.add(command2)
+macroCommand.add(command3)
+
+macroCommand.excute()
+
+// 煮咖啡
+// 打开电视
+// 打开音响
+// 打开空调
+// 打开电脑
+</code></pre>
+<pre><code>//   扫描文件夹
+const Folder = function(folder) {
+  this.folder = folder
+  this.lists = []
+}
+
+Folder.prototype.add = function(resource) {
+  this.lists.push(resource)
+}
+
+Folder.prototype.scan = function() {
+  console.log('开始扫描文件夹: ', this.folder)
+  for (let i = 0, folder; folder = this.lists[i++];) {
+    folder.scan()
+  }
+}
+
+const File = function(file) {
+  this.file = file
+}
+
+File.prototype.add = function() {
+  throw Error('文件下不能添加其它文件夹或文件')
+}
+
+File.prototype.scan = function() {
+  console.log('开始扫描文件: ', this.file)
+}
+
+const folder = new Folder('根文件夹')
+const folder1 = new Folder('JS')
+const folder2 = new Folder('life')
+
+const file1 = new File('深入React技术栈.pdf')
+const file2 = new File('JavaScript权威指南.pdf')
+const file3 = new File('小王子.pdf')
+
+folder1.add(file1)
+folder1.add(file2)
+
+folder2.add(file3)
+
+folder.add(folder1)
+folder.add(folder2)
+
+folder.scan()
+
+// 开始扫描文件夹:  根文件夹
+// 开始扫描文件夹:  JS
+// 开始扫描文件:  深入React技术栈.pdf
+// 开始扫描文件:  JavaScript权威指南.pdf
+// 开始扫描文件夹:  life
+// 开始扫描文件:  小王子.pdf
+</code></pre>
 <h1 id="模板方法模式">模板方法模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>在继承的基础上, 在父类中定义好执行的算法。</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>泡茶与泡咖啡(大致过程一致、部分过程不一致)</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<pre><code>const Drinks = function() {}
+
+Drinks.prototype.firstStep = function() {
+  console.log('烧开水')
+}
+
+Drinks.prototype.secondStep = function() {}
+
+Drinks.prototype.thirdStep = function() {
+  console.log('倒入杯子')
+}
+
+Drinks.prototype.fourthStep = function() {}
+
+Drinks.prototype.init = function() { // 模板方法模式核心: 在父类上定义好执行算法
+  this.firstStep()
+  this.secondStep()
+  this.thirdStep()
+  this.fourthStep()
+}
+
+const Tea = function() {}
+
+Tea.prototype = new Drinks
+
+Tea.prototype.secondStep = function() {
+  console.log('浸泡茶叶')
+}
+
+Tea.prototype.fourthStep = function() {
+  console.log('加柠檬')
+}
+
+const Coffee = function() {}
+
+Coffee.prototype = new Drinks
+
+Coffee.prototype.secondStep = function() {
+  console.log('冲泡咖啡')
+}
+
+Coffee.prototype.fourthStep = function() {
+  console.log('加糖')
+}
+
+const tea = new Tea()
+tea.init()
+
+// 烧开水
+// 浸泡茶叶
+// 倒入杯子
+// 加柠檬
+
+const coffee = new Coffee()
+coffee.init()
+
+// 烧开水
+// 冲泡咖啡
+// 倒入杯子
+// 加糖
+
+//  ****   钩子（加佐料）     ****
+
+Drinks.prototype.ifNeedFlavour = function() { // 加上钩子
+  return true
+}
+
+Drinks.prototype.init = function() { // 模板方法模式核心: 在父类上定义好执行算法
+  this.firstStep()
+  this.secondStep()
+  this.thirdStep()
+  if (this.ifNeedFlavour()) { // 默认是 true, 也就是要加调料
+    this.fourthStep()
+  }
+}
+
+// ...
+const Coffee = function() {}
+
+Coffee.prototype = new Drinks()
+// ...
+
+Coffee.prototype.ifNeedFlavour = function() {
+  return window.confirm('是否需要佐料吗？') // 弹框选择是否佐料
+}
+</code></pre>
 <h1 id="享元模式">享元模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>享元模式是一种优化程序性能的模式, 本质为减少对象创建的个数。</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>有大量相似的对象, 占用了大量内存</li>
+<li>对象中大部分状态可以抽离为外部状态</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<p><a href="https://github.com/MuYunyun/blog/blob/master/BasicSkill/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.md">男女模型试穿衣服</a></p>
 <h1 id="职责链模式">职责链模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>类似多米诺骨牌, 通过请求第一个描述, 会持续执行后续的描述, 直到返回结果为止。</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>在项目中能对 if-else 语句进行优化</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<p><a href="https://github.com/MuYunyun/blog/blob/master/BasicSkill/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F.md">场景: 某电商针对已付过定金的用户有优惠政策, 在正式购买后, 已经支付过 500 元定金的用户会收到 100 元的优惠券, 200 元定金的用户可以收到 50 元优惠券, 没有支付过定金的用户只能正常购买。</a></p>
+<p>职责链模式比较重要, 项目中能用到它的地方会有很多, 用上它能解耦 1 个请求对象和 n 个目标对象的关系。</p>
 <h1 id="中介者模式">中介者模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>对象和对象之间借助第三方中介者进行通信。。</li>
+</ul>
+<p>👉  <strong>场景</strong><br>
++</p>
+<p>👉  <strong>实现</strong></p>
+<pre><code>// 一场测试结束后, 公布结果: 告知解答出题目的人挑战成功, 否则挑战失败。
+const player = function(name) {
+  this.name = name
+  playerMiddle.add(name)
+}
+
+player.prototype.win = function() {
+  playerMiddle.win(this.name)
+}
+
+player.prototype.lose = function() {
+  playerMiddle.lose(this.name)
+}
+
+const playerMiddle = (function() { // 将就用下这个 demo, 这个函数当成中介者
+  const players = []
+  const winArr = []
+  const loseArr = []
+  return {
+    add: function(name) {
+      players.push(name)
+    },
+    win: function(name) {
+      winArr.push(name)
+      if (winArr.length + loseArr.length === players.length) {
+        this.show()
+      }
+    },
+    lose: function(name) {
+      loseArr.push(name)
+      if (winArr.length + loseArr.length === players.length) {
+        this.show()
+      }
+    },
+    show: function() {
+      for (let winner of winArr) {
+        console.log(winner + '挑战成功;')
+      }
+      for (let loser of loseArr) {
+        console.log(loser + '挑战失败;')
+      }
+    },
+  }
+}())
+
+const a = new player('A 选手')
+const b = new player('B 选手')
+const c = new player('C 选手')
+
+a.win()
+b.win()
+c.lose()
+
+// A 选手挑战成功;
+// B 选手挑战成功;
+// C 选手挑战失败;
+</code></pre>
+<p>在这段代码中 A、B、C 之间没有直接发生关系, 而是通过另外的 playerMiddle 对象建立链接, 姑且将之当成是中介者模式了。</p>
 <h1 id="状态模式">状态模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>将事物内部的每个状态分别封装成类, 内部状态改变会产生不同行为。</li>
+<li>优点: 用对象代替字符串记录当前状态, 状态易维护</li>
+<li>缺点: 需编写大量状态类对象</li>
+</ul>
+<p>👉  <strong>场景</strong><br>
++</p>
+<p>👉  <strong>实现</strong></p>
+<pre><code>//  某某牌电灯, 按一下按钮打开弱光, 按两下按钮打开强光, 按三下按钮关闭灯光。
+// 将状态封装成不同类
+const weakLight = function(light) {
+  this.light = light
+}
+
+weakLight.prototype.press = function() {
+  console.log('打开强光')
+  this.light.setState(this.light.strongLight)
+}
+
+const strongLight = function(light) {
+  this.light = light
+}
+
+strongLight.prototype.press = function() {
+  console.log('关灯')
+  this.light.setState(this.light.offLight)
+}
+
+const offLight = function(light) {
+  this.light = light
+}
+
+offLight.prototype.press = function() {
+  console.log('打开弱光')
+  this.light.setState(this.light.weakLight)
+}
+
+const Light = function() {
+  this.weakLight = new weakLight(this)
+  this.strongLight = new strongLight(this)
+  this.offLight = new offLight(this)
+  this.currentState = this.offLight          // 初始状态
+}
+
+Light.prototype.init = function() {
+  const btn = document.createElement('button')
+  btn.innerHTML = '按钮'
+  document.body.append(btn)
+  const self = this
+  btn.addEventListener('click', function() {
+    self.currentState.press()
+  })
+}
+
+Light.prototype.setState = function(state) { // 改变当前状态
+  this.currentState = state
+}
+
+const light = new Light()
+light.init()
+
+// 打开弱光
+// 打开强光
+// 关灯
+</code></pre>
+<pre><code>// 非面向对象实现的状态模式
+// 借助于 JavaScript 的委托机制, 可以像如下实现状态模式:
+const obj = {
+  'weakLight': {
+    press: function() {
+      console.log('打开强光')
+      this.currentState = obj.strongLight
+    }
+  },
+  'strongLight': {
+    press: function() {
+      console.log('关灯')
+      this.currentState = obj.offLight
+    }
+  },
+  'offLight': {
+    press: function() {
+      console.log('打开弱光')
+      this.currentState = obj.weakLight
+    }
+  },
+}
+
+const Light = function() {
+  this.currentState = obj.offLight
+}
+
+Light.prototype.init = function() {
+  const btn = document.createElement('button')
+  btn.innerHTML = '按钮'
+  document.body.append(btn)
+  const self = this
+  btn.addEventListener('click', function() {
+    self.currentState.press.call(self) // 通过 call 完成委托
+  })
+}
+
+const light = new Light()
+light.init()
+</code></pre>
 <h1 id="适配者模式">适配者模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>主要用于解决两个接口之间不匹配的问题。</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>枚举接口变更</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<pre><code>// 老接口
+const zhejiangCityOld = (function() {
+  return [
+    {
+      name: 'hangzhou',
+      id: 11,
+    },
+    {
+      name: 'jinhua',
+      id: 12
+    }
+  ]
+}())
+
+console.log(getZhejiangCityOld())
+
+// 新接口希望是下面形式
+{
+  hangzhou: 11,
+  jinhua: 12,
+}
+
+// 这时候就可采用适配者模式
+const adaptor = (function(oldCity) {
+  const obj = {}
+  for (let city of zhejiangCityOld) {
+    obj[city.name] = city.id
+  }
+  return obj
+}())
+</code></pre>
 <h1 id="观察者模式">观察者模式</h1>
+<p>👉  <strong>描述</strong></p>
+<ul>
+<li>MVVM框架原理</li>
+</ul>
+<p>👉  <strong>场景</strong></p>
+<ul>
+<li>Vue双向数据绑定</li>
+</ul>
+<p>👉  <strong>实现</strong></p>
+<p><a href="https://github.com/MuYunyun/blog/issues/11">MVVM 框架解析之双向绑定</a></p>
 
         </div>
 
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/UZJVN1Zkn">
+            <span class="flex-auto">设计模式</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/YKq-0_lusx">
+            <span class="flex-auto">原理</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/2oKqqAWSyK">
+            <span class="flex-auto">案例</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/SusqhE8gf">
+            <span class="flex-auto">JavaScript</span>
+          </a>
         
 
 
