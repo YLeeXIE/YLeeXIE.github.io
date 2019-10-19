@@ -1,0 +1,343 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>代码猿</title>
+<meta name="description" content="一入编程深似海
+从此妹子是路人" />
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1571467584349">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://yleexie.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="代码猿 - Atom Feed" href="https://yleexie.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://yleexie.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1571467584349" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#%E7%A4%BA%E6%84%8F%E5%9B%BE">示意图</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a>
+<ul>
+<li><a href="#%E6%A0%B9%E6%8D%AE%E5%93%8D%E5%BA%94%E5%A4%B4%E9%83%A8%E7%9A%84%E5%AD%97%E6%AE%B5%E7%A1%AE%E5%AE%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5">根据响应头部的字段确定浏览器缓存策略</a>
+<ul>
+<li><a href="#span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxcache-constrolspan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Cache-Constrol</span></a></li>
+<li><a href="#span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxpargmaspan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Pargma</span></a></li>
+<li><a href="#span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxexpiresspan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Expires</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%BC%BA%E7%BC%93%E5%AD%98%E5%91%BD%E4%B8%AD%E6%9D%A1%E4%BB%B6">强缓存命中条件</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%A1%E9%AA%8C%E8%B5%84%E6%BA%90%E6%98%AF%E5%90%A6%E4%BF%AE%E6%94%B9%E6%9C%BA%E5%88%B6">服务端校验资源是否修改机制</a><br>
+*
+<ul>
+<li><a href="#span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxlast-modifiedif-modified-sincespan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Last-Modified/If-Modified-Since</span></a></li>
+<li><a href="#span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxetagif-none-matchspan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Etag/If-None-Match</span></a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%BF%E7%94%A8">浏览器缓存的使用</a></li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://yleexie.github.io/post/AGY0xEDLZ/" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"><img src="https://cdn.img.wenhairu.com/images/2019/10/10/8hMaB.png" alt="8hMaB.png" border="0">&nbsp;&nbsp;代码猿</div>
+    <!-- <a class="rss" href="https://yleexie.github.io/atom.xml" target="_blank">RSS</a> -->
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">理解浏览器的缓存机制</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2019-10-19 / 5 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="data:image/jpeg;base64,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" alt="">
+        
+        <div class="post-content yue">
+          <h1 id="介绍">介绍</h1>
+<p>浏览器缓存可以提高网页打开速度、减少<code>Http</code>请求，在提高用户体验、重复利用资源、减少网络带宽上发挥着重要的作用。特别是现在用户对网站响应速度要求特别高的情况下，高效地利用浏览器缓存机制可以使网站性能优化事半功倍。<br>
+下面对浏览器缓存机制做一些分析。</p>
+<h1 id="概念">概念</h1>
+<p>HTTP缓存可以分为<code>强缓存</code>和<code>协商缓存</code>：</p>
+<ol>
+<li>强缓存：缓存命令不会发送请求到服务器，直接从本地缓存中获取资源，状态码200（form cache）</li>
+<li>协商缓存：协商缓存会向服务器发送请求，服务器直接通过头部字段来验证资源是否命中协商缓存，如果命中，则返回状态码304（not modified），通知浏览器缓存中获取资源 。</li>
+</ol>
+<h1 id="示意图">示意图</h1>
+<img src ="https://newbyvector.github.io/2018/05/10/2015-05-10/3.png" />
+<h1 id="分析">分析</h1>
+<h2 id="根据响应头部的字段确定浏览器缓存策略">根据响应头部的字段确定浏览器缓存策略</h2>
+<p>响应头中与缓存策略相关的字段包括<code>Cache-Control</code>,<code>Pragma</code>,<code>Expires</code>,下面分析这三个字段：</p>
+<h3 id="span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxcache-constrolspan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Cache-Constrol</span></h3>
+<p><code>Cache-Constrol</code>是Http/1.1新增的字段、是控制浏览器缓存的主要字段。它的主要内容如下：</p>
+<ol>
+<li>no-cache:资源可以被缓存、但立即过期、下次访问必须验证资源有效性</li>
+<li>max-age:缓存资源、在指定时间后过期(单位:秒)</li>
+<li>no-store:资源不会被缓存</li>
+<li>public:资源可以被浏览器和代理服务器缓存</li>
+<li>private:资源只能被浏览器缓存</li>
+</ol>
+<h3 id="span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxpargmaspan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Pargma</span></h3>
+<p><code>Pargma</code>是Http/1.0的头部字段、只有一个值<code>no-cache</code>、功能和<code>Cache-Constrol:no-Cache</code>一样</p>
+<h3 id="span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxexpiresspan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Expires</span></h3>
+<p><code>Expires</code>是缓存到期时间、以服务器时间为参考、优先级比<code>Cache-Constrol:max-age</code>低。在一些场景中必须避免浏览器缓存、推荐的做法是设置请求头：<br>
+<code>Cache-Constrol:no-cache,no-store,must-revalidata</code></p>
+<h1 id="强缓存命中条件">强缓存命中条件</h1>
+<p>我们会发现、最优的做法是让一些公开资源命中强缓存，这是响应最快的。那么命中强缓存的条件又是什么呢？<br>
+1. 请求头部不包括<code>Pragma</code>字段<br>
+2. 响应头部<code>Cache-Constrol</code>不包括<code>no-cache</code>、<code>no-store</code><br>
+3. 响应头部<code>max-age</code>、<code>Expires</code>大于请求日期</p>
+<p>如果我们在很短的一段时间内多次访问同一个资源，并且响应头部却没有 <code>max-age</code> 或者 <code>Expires</code> 信息，是不是就不会命中强缓存了呢？不是的，浏览器会做出优化，默认采用一个启发式算法，取响应头的 <code>(Date - Last-Modified) * 0.1</code>作为缓存有效时间，只要是在这段时间内请求这个资源，即使没有缓存过期字段，也会命中强缓存。</p>
+<h1 id="服务端校验资源是否修改机制">服务端校验资源是否修改机制</h1>
+<h3 id="span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxlast-modifiedif-modified-sincespan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Last-Modified/If-Modified-Since</span></h3>
+<p>服务器响应资源的时候返回一个头部字段 <code>Last-Modified</code>，代表该资源最后修改时间，当浏览器再次向服务器请求该资源时，会传送 <code>If-Modified-Since</code> 信息，值就是上次服务器响应的最后修改时间， 服务器将这个请求时间与本地资源实际最后修改时间做对比，如果文件没有被修改，则返回状态码 304，通知浏览器从缓存中读取资源文件。</p>
+<h3 id="span-stylecolor42b983font-size30pxspan-span-stylecolor424242font-size24pxetagif-none-matchspan"><span style="color:#42B983;font-size:30px;">#<span>    <span style="color:#424242;font-size:24px;">Etag/If-None-Match</span></h3>
+<p><code>ETag</code> 是一个响应首部字段，它是根据资源内容生成的一段hash字符串，标识资源的状态，由服务端产生。当浏览器再次向服务器请求该资源时，会传送<code>If-None-Match</code> 字段，服务器收到请求后，拿 <code>If-None-Match</code>字段的值与资源的实际 <code>ETage</code> 值进行比较，若相同，则命中协商缓存，返回状态码 304。<code>ETag</code>优先级比<code>Last-Modified</code> 高，同时存在时会以<code>ETag</code> 为准。</p>
+<p>那已经有了 <code>Last-Modified</code>机制，为什么要引入 <code>ETage</code> 机制呢？<br>
+1. 服务器不能精确的得到资源的修改时间、这样就无法通过最后修改时间判断资源是否更新<br>
+2. 如果资源修改非常频繁、在秒以下的时间进行修改、而<code>Last-Modified</code>只能精确到秒<br>
+3. 一些资源的最后修改时间改变了、但是内容没有变化、使用<code>Etag</code>就能判别出资源内容是否被修改</p>
+<h1 id="浏览器缓存的使用">浏览器缓存的使用</h1>
+<p>使用缓存的过程其实就是根据场景设置<code>Cache-Constrol</code>的值的过程：<br>
+<img src="https://newbyvector.github.io/2018/05/10/2015-05-10/4.png" /></p>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/xEauQxFTA">
+            <span class="flex-auto">缓存</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/UVnm5ahM48">
+            <span class="flex-auto">HTTP</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/_68z8QdqXB">
+            <span class="flex-auto">浏览器</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/ZUdja1g7Wh">
+            <span class="flex-auto">后台</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/SusqhE8gf">
+            <span class="flex-auto">JavaScript</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://yleexie.github.io/post/YDaqDF713">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  JavaScript常见设计模式整理
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://yleexie.github.io/post/OtEaIXxr8">
+                <h3 class="post-title">
+                  RequestAnimationFrame理解与实践
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '26e86b8acd36313b1772',
+    clientSecret: 'c7fd619e3cde059a1e0815d515d06c0af2f6a5ff',
+    repo: 'YLeeXIE.github.io',
+    owner: 'YLeeXIE',
+    admin: ['YLeeXIE'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://yleexie.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>

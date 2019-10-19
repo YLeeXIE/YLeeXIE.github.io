@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yleexie.github.io</id>
     <title>代码猿</title>
-    <updated>2019-10-19T03:49:46.857Z</updated>
+    <updated>2019-10-19T06:46:29.378Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yleexie.github.io"/>
     <link rel="self" href="https://yleexie.github.io/atom.xml"/>
@@ -11,6 +11,20 @@
     <logo>https://yleexie.github.io/images/avatar.png</logo>
     <icon>https://yleexie.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 代码猿</rights>
+    <entry>
+        <title type="html"><![CDATA[JavaScript常见设计模式整理]]></title>
+        <id>https://yleexie.github.io/post/YDaqDF713</id>
+        <link href="https://yleexie.github.io/post/YDaqDF713">
+        </link>
+        <updated>2019-10-19T06:17:44.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[理解浏览器的缓存机制]]></title>
+        <id>https://yleexie.github.io/post/Z7qMxzXLw</id>
+        <link href="https://yleexie.github.io/post/Z7qMxzXLw">
+        </link>
+        <updated>2019-10-19T03:50:56.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[RequestAnimationFrame理解与实践]]></title>
         <id>https://yleexie.github.io/post/OtEaIXxr8</id>
@@ -66,19 +80,5 @@
         <link href="https://yleexie.github.io/post/ckt4Y7_N1">
         </link>
         <updated>2019-10-10T15:47:41.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[8个实用Python的脚本，收藏备用]]></title>
-        <id>https://yleexie.github.io/post/bksGIXizU</id>
-        <link href="https://yleexie.github.io/post/bksGIXizU">
-        </link>
-        <updated>2019-10-10T15:41:11.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[一张图理清 Vue 3.0 的响应式系统]]></title>
-        <id>https://yleexie.github.io/post/qGUCTCcrs</id>
-        <link href="https://yleexie.github.io/post/qGUCTCcrs">
-        </link>
-        <updated>2019-10-10T15:24:22.000Z</updated>
     </entry>
 </feed>
