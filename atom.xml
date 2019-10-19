@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yleexie.github.io</id>
     <title>代码猿</title>
-    <updated>2019-10-19T07:49:21.617Z</updated>
+    <updated>2019-10-19T09:11:55.548Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yleexie.github.io"/>
     <link rel="self" href="https://yleexie.github.io/atom.xml"/>
@@ -11,6 +11,13 @@
     <logo>https://yleexie.github.io/images/avatar.png</logo>
     <icon>https://yleexie.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 代码猿</rights>
+    <entry>
+        <title type="html"><![CDATA[WebPack原理解析]]></title>
+        <id>https://yleexie.github.io/post/AjyJb9MfD</id>
+        <link href="https://yleexie.github.io/post/AjyJb9MfD">
+        </link>
+        <updated>2019-10-19T08:23:42.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[JavaScript常见设计模式整理]]></title>
         <id>https://yleexie.github.io/post/YDaqDF713</id>
@@ -73,12 +80,5 @@
         <link href="https://yleexie.github.io/post/E1jNUuZ9D">
         </link>
         <updated>2019-10-10T15:58:39.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[整理经常在H5移动端开发遇到的知识]]></title>
-        <id>https://yleexie.github.io/post/ckt4Y7_N1</id>
-        <link href="https://yleexie.github.io/post/ckt4Y7_N1">
-        </link>
-        <updated>2019-10-10T15:47:41.000Z</updated>
     </entry>
 </feed>

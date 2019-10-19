@@ -1,0 +1,766 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>代码猿</title>
+<meta name="description" content="一入编程深似海
+从此妹子是路人" />
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1571476308015">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://yleexie.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="代码猿 - Atom Feed" href="https://yleexie.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://yleexie.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1571476308015" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#webpack%E6%98%AF%E4%BB%80%E4%B9%88">webpack是什么</a></li>
+<li><a href="#%E5%85%A5%E5%8F%A3entry">入口(entry)</a></li>
+<li><a href="#%E8%BE%93%E5%87%BAoutput">输出(output)</a></li>
+<li><a href="#loader">loader</a></li>
+<li><a href="#%E6%8F%92%E4%BB%B6plugins">插件(plugins)</a></li>
+<li><a href="#webpack%E6%89%93%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91">Webpack打包的基本逻辑</a></li>
+<li><a href="#%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90">输出文件分析</a></li>
+<li><a href="#%E7%BC%96%E5%86%99%E7%AE%80%E5%8D%95%E7%9A%84plugin">编写简单的Plugin</a></li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://yleexie.github.io/post/AGY0xEDLZ/" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"><img src="https://cdn.img.wenhairu.com/images/2019/10/10/8hMaB.png" alt="8hMaB.png" border="0">&nbsp;&nbsp;代码猿</div>
+    <!-- <a class="rss" href="https://yleexie.github.io/atom.xml" target="_blank">RSS</a> -->
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">WebPack原理解析</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2019-10-19 / 32 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1306852826,3512007416&amp;fm=26&amp;gp=0.jpg" alt="">
+        
+        <div class="post-content yue">
+          <h1 id="webpack是什么">webpack是什么</h1>
+<p><code>webpack</code>是<code>JavaScript</code>应用程序的静态模块打包器,<code>webpack</code>处理应用程序时,将递归构建一个依赖关系图,依赖图映射了项目中需要的每一个模块,并打包生成一个或多个<code>bundle</code>。<br>
+当在命令行运行指令 <code>webpack</code> 的时候,<code>webpack</code>将默认从当前目录下查找 <code>webpack.config.js</code> 文件<br>
+<code>webpack</code>的配置(<code>webpack.config.js</code>)中有四个核心概念需要理解:</p>
+<ul>
+<li><strong>入口(entry)</strong></li>
+<li><strong>输出(output)</strong></li>
+<li><strong>loader</strong></li>
+<li><strong>插件(plugins)</strong></li>
+</ul>
+<h1 id="入口entry">入口(entry)</h1>
+<p><code>entry</code>属性告诉<code>webpack</code>从哪个模块开始构建依赖图、并计算出所有这个模块直接或间件依赖的模块</p>
+<p><code>entry</code>为<code>String</code>或<code>Array</code>时、<code>entry</code>输出的<code>Chunk</code>名称默认是<code>main</code><br>
+<code>entry</code>为<code>Object</code>时、<code>entry</code>将输出多个<code>Chunk</code>、<code>Chunk</code>的名称将会是<code>key</code></p>
+<p><a href="https://webpack.js.org/concepts/entry-points/">详细内容</a></p>
+<h1 id="输出output">输出(output)</h1>
+<p><code>output</code>属性将告诉<code>webpack</code>最终打包文件的输出路径、以及如何命名打包文件</p>
+<pre><code>const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  // ./dist/main.js
+  output: {
+    // 文件名字可以直接设置
+    filename: 'my-first-webpack.bundle.js', 
+    // 也可以用过变量设置
+    // id - Chunk的唯一标识,从0开始
+    // name - Chunk的名称
+    // hash - Chunk的唯一标识(即id)的hash值
+    // chunkhash - Chunk内容的hash值
+    filename: '[id].[name].[hash].[chunkhash].js',
+    // 配置输出文件的存放目录
+    // __dirname是运行命令行时所在路径
+    path: path.resolve(__dirname, 'dist'), 
+  }
+};
+</code></pre>
+<p><a href="https://webpack.js.org/configuration/output/">node中的path详细内容</a></p>
+<h1 id="loader">loader</h1>
+<p><code>moduel</code>属性配置如何处理模块、其中<code>rules</code>配置模块的读取和解析规则、通常用来配置<code>Loader</code>。<br>
+未增加自定义配置的情况下,<code>webpack</code>只能处理<code>JavaScript</code>文件和<code>JSON</code>文件、<code>Loader</code>可以使<code>webpack</code>处理其他类型的文件到模块中、添加到依赖图中、被应用程序使用</p>
+<pre><code>条件匹配: 通过 test / include / excluede 三个配置来匹配文件,支持string和array
+
+应用规则: 匹配命中文件之后,使用use中的配置来应用loader,同时可以按&quot;从后往前&quot;的顺序应用多个loader
+
+重置顺序: 一组loader的执行顺序迷人是从右向左执行,通过 enforce 选项可以让其中一个loader的执行顺序放到最后或最前
+</code></pre>
+<pre><code>    const path = require('path');
+
+module.exports = {
+  output: {
+    filename: 'my-first-webpack.bundle.js'
+  },
+  module: {
+    rules: [ // 在rules中可以设置多个规则
+      {
+        test: /\.txt$/, // 设置用来匹配什么文件需要被转换
+        // 只命中src目录里的js文件，加快 Webpack 搜索速度
+        include: path.resolve(__dirname, 'src'),
+        // 排除 node_modules 目录下的文件
+        exclude: path.resolve(__dirname, 'node_modules'),
+        // 处理顺序为从后到前，即先交给 sass-loader 处理，再把结果交给 css-loader 最后再给 style-loader。
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+        // use中同样可以设置Object
+        use: [
+              {
+                loader:'babel-loader',
+                options:{
+                  cacheDirectory:true,
+                },
+                // enforce:'post' 的含义是把该 Loader 的执行顺序放到最后
+                // enforce 的值还可以是 pre，代表把 Loader 的执行顺序放到最前面
+                enforce:'post'
+              },
+        ]
+      }
+    ]
+  }
+};
+</code></pre>
+<p><a href="https://webpack.js.org/concepts/loaders/">点此查看详细内容</a></p>
+<h1 id="插件plugins">插件(plugins)</h1>
+<p><code>loaders</code>用来转换某些类型的模块(文件)、<code>plugin</code>则用来执行、打包优化、资源管理和插入环境变量等各种任务。</p>
+<p><code>plugins</code>是用来扩展<code>webpack</code>功能的、通过在构建流程里注入钩子实现、它给<code>webpack</code>带来了很大的灵活性</p>
+<p>通过<code>require</code>引入插件、并将其实例化的对象加入<code>plugin</code>中</p>
+<pre><code>const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
+const webpack = require('webpack'); //to access built-in plugins
+
+module.exports = {
+  module: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({template: './src/index.html'})
+  ]
+};
+
+</code></pre>
+<p>上方例子, <code>html-webpack-plugin</code> 插件会给应用生成一个<code>HTML</code>文件,并在文件中插入打包好的文件.</p>
+<pre><code>tip: 使用 Plugin 的难点在于掌握 Plugin 本身提供的配置项，而不是如何在 Webpack 中接入 Plugin。
+</code></pre>
+<p><a href="https://webpack.js.org/concepts/plugins/">查看详细内容</a></p>
+<h1 id="webpack打包的基本逻辑">Webpack打包的基本逻辑</h1>
+<pre><code>1. 初始化参数
+</code></pre>
+<p>从配置文件和<code>Shell</code>语句中读取合并参数、得出最终参数</p>
+<pre><code>2. 开始编译
+</code></pre>
+<p>用第一步得到参数初始化<code>Compiler</code>对象、加载所有配置的插件、执行对象中的<code>run</code>方法开始执行编译</p>
+<pre><code>3. 确定入口
+</code></pre>
+<p>根据配置中的<code>entry</code>找到所有入口文件</p>
+<pre><code>4. 编译模块
+</code></pre>
+<p>从入口文件出发、调用所有配置的<code>loader</code>对模块进行编译、再找出改模块的依赖、递归查找所有的模块依赖</p>
+<pre><code>5. 完成模块编译
+</code></pre>
+<p>经过第四步使用loader对所有模块进行编译后、得到所有模块被编译后的内容以及它们的依赖关系</p>
+<pre><code>6. 输出资源
+</code></pre>
+<p>根据入口和模块之间的依赖关系、组成一个个包含多个模块的<code>Chunk</code>、再把每个<code>Chunk</code>转换成单独的文件并加入到输出列表中</p>
+<pre><code>7. 输出完成
+</code></pre>
+<p>确认好输出内容后、根据配置确认输出路径和文件名、把文件内容写入到文件系统中</p>
+<pre><code>tip: 上述过程中,webpack会在特定时间广播出特定时间,插件接受到想要的事件广播之后便会执行特性的逻辑,并且插件可以调用webpack提供的API改变webpack的运行结果
+</code></pre>
+<h1 id="输出文件分析">输出文件分析</h1>
+<pre><code>webpack配置
+</code></pre>
+<pre><code>const path = require('path')
+// Since webpack 4 the &quot;extract-text-webpack-plugin&quot; should not be used for css.
+// Use &quot;mini-css-extract-plugin&quot; instead
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const merge = require('webpack-merge')
+
+// 这个在 npm run dev 和 npm run build 时候是不同的
+const TARGET = process.env.npm_lifecycle_event
+const APP_PATH = path.join(__dirname, '/src')
+const dist = path.resolve(__dirname, 'dist')
+const common = {
+  entry: `${APP_PATH}/index.js`,
+  output: {
+    path: dist,
+    filename: 'index.js'
+  }
+}
+
+let other = {}
+
+if (TARGET === 'dev') {
+  other = {
+    mode: 'development',
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          // TODO 理解loader的执行顺序
+          use: [
+            'style-loader', // Adds CSS to the DOM by injecting a &lt;style&gt; tag
+            'css-loader'
+          ]
+        }
+      ]
+    },
+    plugins: [new HtmlWebpackPlugin({ template: `${APP_PATH}/index.html` })]
+  }
+}
+
+if (TARGET === 'build') {
+  console.log('就是这里')
+  other = {
+    mode: 'development',
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader, // 提取额外的css文件
+            'css-loader'
+          ]
+        }
+      ]
+    },
+    plugins: [
+      new HtmlWebpackPlugin({ template: `${APP_PATH}/index.html` }),
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css'
+      })
+    ]
+  }
+}
+
+module.exports = merge(common, other)
+
+</code></pre>
+<pre><code>index.html
+</code></pre>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot; /&gt;
+    &lt;title&gt;Webpack&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<pre><code>index.js
+</code></pre>
+<pre><code> require('./style.css')
+require('./moduleA.js')
+const b = require('./moduleB.js')
+setTimeout(() =&gt; {
+  console.log('new b is running')
+  b()
+}, 1000)
+
+</code></pre>
+<pre><code>moduleA.js
+</code></pre>
+<pre><code>var newDiv = document.createElement('div') 
+var newContent = document.createTextNode(&quot;Hi there! I'm module A!&quot;)
+newDiv.appendChild(newContent)
+document.body.appendChild(newDiv)
+
+</code></pre>
+<pre><code>moduleB.js
+</code></pre>
+<pre><code>module.exports = function() {
+  var newDiv = document.createElement('div')
+  var newContent = document.createTextNode(&quot;Hi there! I'm module B!&quot;)
+  newDiv.appendChild(newContent)
+  document.body.appendChild(newDiv)
+}
+
+</code></pre>
+<pre><code>style.css
+</code></pre>
+<pre><code>body {
+    background: pink;
+}
+</code></pre>
+<pre><code>webpack.config.js
+</code></pre>
+<pre><code>// webpack.config.js
+// entry的参数是String
+module.exports = {
+  entry: './src/index.js'  // 这是默认值,当然可以自定义
+}
+
+// entry的参数是Array
+module.exports = {
+  entry: ['./app/entry1', './app/entry2']  
+}
+
+// entry的参数是Object
+module.exports = {
+  entry: { 
+    a: './app/entry-a', 
+    b: ['./app/entry-b1', './app/entry-b2']
+    }  
+}
+
+// entry的参数可以同步函数
+module.exports = {
+  entry: () =&gt; {
+    return {
+      a:'./pages/a',
+      b:'./pages/b',
+    }
+  }
+}
+
+// entry的参数可以异步函数
+module.exports = {
+  entry: () =&gt; {
+    return new Promise((resolve)=&gt;{
+      resolve({
+        a:'./pages/a',
+        b:'./pages/b',
+      });
+    });
+  }
+}
+
+</code></pre>
+<pre><code>打包之后的文件
+</code></pre>
+<pre><code>;(function(modules) {
+  // webpackBootstrap
+  // The module cache
+  var installedModules = {}
+
+  // The require function
+  function __webpack_require__(moduleId) {
+    // Check if module is in cache
+    // 判断需要 require 的函数是否已经在缓存中了
+    if (installedModules[moduleId]) {
+      return installedModules[moduleId].exports
+    }
+    // Create a new module (and put it into the cache)
+    // 初始化需要require的module,并保存到缓存中
+    var module = (installedModules[moduleId] = {
+      i: moduleId,
+      l: false,
+      exports: {}
+    })
+
+    // Execute the module function
+    // 立即执行函数的参数 + moduleId 定位到当前需要执行的函数
+    // 这里将执行webpack打包之后的函数
+    // 传入module.exports  module 以及 require函数
+    // 然后将执行模块的内在逻辑,递归处理依赖, 并将模块的输出保存
+    debugger
+    // debugger2 - 模块执行
+    modules[moduleId].call(
+      module.exports,
+      module,
+      module.exports,
+      __webpack_require__
+    )
+
+    // Flag the module as loaded
+    // 标志当前模块已加载
+    module.l = true
+
+    // Return the exports of the module
+    // 返回模块的输出
+    return module.exports
+  }
+  //  ----- 对主逻辑不重要的代码 - start -----
+  // expose the modules object (__webpack_modules__)
+  __webpack_require__.m = modules
+
+  // expose the module cache
+  __webpack_require__.c = installedModules
+
+  // define getter function for harmony exports
+  __webpack_require__.d = function(exports, name, getter) {
+    if (!__webpack_require__.o(exports, name)) {
+      Object.defineProperty(exports, name, { enumerable: true, get: getter })
+    }
+  }
+
+  // define __esModule on exports
+  __webpack_require__.r = function(exports) {
+    if (typeof Symbol !== 'undefined' &amp;&amp; Symbol.toStringTag) {
+      Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' })
+    }
+    Object.defineProperty(exports, '__esModule', { value: true })
+  }
+
+  // create a fake namespace object
+  // mode &amp; 1: value is a module id, require it
+  // mode &amp; 2: merge all properties of value into the ns
+  // mode &amp; 4: return value when already ns object
+  // mode &amp; 8|1: behave like require
+  __webpack_require__.t = function(value, mode) {
+    if (mode &amp; 1) value = __webpack_require__(value)
+    if (mode &amp; 8) return value
+    if (mode &amp; 4 &amp;&amp; typeof value === 'object' &amp;&amp; value &amp;&amp; value.__esModule)
+      return value
+    var ns = Object.create(null)
+    __webpack_require__.r(ns)
+    Object.defineProperty(ns, 'default', { enumerable: true, value: value })
+    if (mode &amp; 2 &amp;&amp; typeof value != 'string')
+      for (var key in value)
+        __webpack_require__.d(
+          ns,
+          key,
+          function(key) {
+            return value[key]
+          }.bind(null, key)
+        )
+    return ns
+  }
+
+  // getDefaultExport function for compatibility with non-harmony modules
+  __webpack_require__.n = function(module) {
+    var getter =
+      module &amp;&amp; module.__esModule
+        ? function getDefault() {
+            return module['default']
+          }
+        : function getModuleExports() {
+            return module
+          }
+    __webpack_require__.d(getter, 'a', getter)
+    return getter
+  }
+
+  // Object.prototype.hasOwnProperty.call
+  __webpack_require__.o = function(object, property) {
+    return Object.prototype.hasOwnProperty.call(object, property)
+  }
+
+  // __webpack_public_path__
+  __webpack_require__.p = ''
+  //  ----- 对主逻辑不重要的代码 - ending -----
+  // Load entry module and return exports
+  //  debugger1 - 逻辑从这里开始 
+  // __webpack_require__ 即 require 函数
+  // 并设置了入口函数的key, moduleId = './src/index.js'
+  return __webpack_require__((__webpack_require__.s = './src/index.js'))
+})({
+  './node_modules/css-loader/dist/cjs.js!./src/style.css': function(
+    module,
+    exports,
+    __webpack_require__
+  ) {
+    eval(
+      'exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ &quot;./node_modules/css-loader/dist/runtime/api.js&quot;)(false);\n// Module\nexports.push([module.i, &quot;body {\\n    background: pink;\\n}&quot;, &quot;&quot;]);\n\n\n\n//# sourceURL=webpack:///./src/style.css?./node_modules/css-loader/dist/cjs.js'
+    )
+  },
+  './node_modules/css-loader/dist/runtime/api.js': function(
+    module,
+    exports,
+    __webpack_require__
+  ) {
+    'use strict'
+    eval(
+      &quot;\n\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n  Author Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function (useSourceMap) {\n  var list = []; // return the list of modules as css string\n\n  list.toString = function toString() {\n    return this.map(function (item) {\n      var content = cssWithMappingToString(item, useSourceMap);\n\n      if (item[2]) {\n        return '@media ' + item[2] + '{' + content + '}';\n      } else {\n        return content;\n      }\n    }).join('');\n  }; // import a list of modules into the list\n\n\n  list.i = function (modules, mediaQuery) {\n    if (typeof modules === 'string') {\n      modules = [[null, modules, '']];\n    }\n\n    var alreadyImportedModules = {};\n\n    for (var i = 0; i &lt; this.length; i++) {\n      var id = this[i][0];\n\n      if (id != null) {\n        alreadyImportedModules[id] = true;\n      }\n    }\n\n    for (i = 0; i &lt; modules.length; i++) {\n      var item = modules[i]; // skip already imported module\n      // this implementation is not 100% perfect for weird media query combinations\n      // when a module is imported multiple times with different media queries.\n      // I hope this will never occur (Hey this way we have smaller bundles)\n\n      if (item[0] == null || !alreadyImportedModules[item[0]]) {\n        if (mediaQuery &amp;&amp; !item[2]) {\n          item[2] = mediaQuery;\n        } else if (mediaQuery) {\n          item[2] = '(' + item[2] + ') and (' + mediaQuery + ')';\n        }\n\n        list.push(item);\n      }\n    }\n  };\n\n  return list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n  var content = item[1] || '';\n  var cssMapping = item[3];\n\n  if (!cssMapping) {\n    return content;\n  }\n\n  if (useSourceMap &amp;&amp; typeof btoa === 'function') {\n    var sourceMapping = toComment(cssMapping);\n    var sourceURLs = cssMapping.sources.map(function (source) {\n      return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';\n    });\n    return [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n  }\n\n  return [content].join('\\n');\n} // Adapted from convert-source-map (MIT)\n\n\nfunction toComment(sourceMap) {\n  // eslint-disable-next-line no-undef\n  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n  return '/*# ' + data + ' */';\n}\n\n//# sourceURL=webpack:///./node_modules/css-loader/dist/runtime/api.js?&quot;
+    )
+  },
+
+  './node_modules/style-loader/lib/addStyles.js': function(
+    module,
+    exports,
+    __webpack_require__
+  ) {
+    eval(
+      '/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n\nvar stylesInDom = {};\n\nvar\tmemoize = function (fn) {\n\tvar memo;\n\n\treturn function () {\n\t\tif (typeof memo === &quot;undefined&quot;) memo = fn.apply(this, arguments);\n\t\treturn memo;\n\t};\n};\n\nvar isOldIE = memoize(function () {\n\t// Test for IE &lt;= 9 as proposed by Browserhacks\n\t// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805\n\t// Tests for existence of standard globals is to allow style-loader\n\t// to operate correctly into non-standard environments\n\t// @see https://github.com/webpack-contrib/style-loader/issues/177\n\treturn window &amp;&amp; document &amp;&amp; document.all &amp;&amp; !window.atob;\n});\n\nvar getTarget = function (target, parent) {\n  if (parent){\n    return parent.querySelector(target);\n  }\n  return document.querySelector(target);\n};\n\nvar getElement = (function (fn) {\n\tvar memo = {};\n\n\treturn function(target, parent) {\n                // If passing function in options, then use it for resolve &quot;head&quot; element.\n                // Useful for Shadow Root style i.e\n                // {\n                //   insertInto: function () { return document.querySelector(&quot;#foo&quot;).shadowRoot }\n                // }\n                if (typeof target === \'function\') {\n                        return target();\n                }\n                if (typeof memo[target] === &quot;undefined&quot;) {\n\t\t\tvar styleTarget = getTarget.call(this, target, parent);\n\t\t\t// Special case to return head of iframe instead of iframe itself\n\t\t\tif (window.HTMLIFrameElement &amp;&amp; styleTarget instanceof window.HTMLIFrameElement) {\n\t\t\t\ttry {\n\t\t\t\t\t// This will throw an exception if access to iframe is blocked\n\t\t\t\t\t// due to cross-origin restrictions\n\t\t\t\t\tstyleTarget = styleTarget.contentDocument.head;\n\t\t\t\t} catch(e) {\n\t\t\t\t\tstyleTarget = null;\n\t\t\t\t}\n\t\t\t}\n\t\t\tmemo[target] = styleTarget;\n\t\t}\n\t\treturn memo[target]\n\t};\n})();\n\nvar singleton = null;\nvar\tsingletonCounter = 0;\nvar\tstylesInsertedAtTop = [];\n\nvar\tfixUrls = __webpack_require__(/*! ./urls */ &quot;./node_modules/style-loader/lib/urls.js&quot;);\n\nmodule.exports = function(list, options) {\n\tif (typeof DEBUG !== &quot;undefined&quot; &amp;&amp; DEBUG) {\n\t\tif (typeof document !== &quot;object&quot;) throw new Error(&quot;The style-loader cannot be used in a non-browser environment&quot;);\n\t}\n\n\toptions = options || {};\n\n\toptions.attrs = typeof options.attrs === &quot;object&quot; ? options.attrs : {};\n\n\t// Force single-tag solution on IE6-9, which has a hard limit on the # of &lt;style&gt;\n\t// tags it will allow on a page\n\tif (!options.singleton &amp;&amp; typeof options.singleton !== &quot;boolean&quot;) options.singleton = isOldIE();\n\n\t// By default, add &lt;style&gt; tags to the &lt;head&gt; element\n        if (!options.insertInto) options.insertInto = &quot;head&quot;;\n\n\t// By default, add &lt;style&gt; tags to the bottom of the target\n\tif (!options.insertAt) options.insertAt = &quot;bottom&quot;;\n\n\tvar styles = listToStyles(list, options);\n\n\taddStylesToDom(styles, options);\n\n\treturn function update (newList) {\n\t\tvar mayRemove = [];\n\n\t\tfor (var i = 0; i &lt; styles.length; i++) {\n\t\t\tvar item = styles[i];\n\t\t\tvar domStyle = stylesInDom[item.id];\n\n\t\t\tdomStyle.refs--;\n\t\t\tmayRemove.push(domStyle);\n\t\t}\n\n\t\tif(newList) {\n\t\t\tvar newStyles = listToStyles(newList, options);\n\t\t\taddStylesToDom(newStyles, options);\n\t\t}\n\n\t\tfor (var i = 0; i &lt; mayRemove.length; i++) {\n\t\t\tvar domStyle = mayRemove[i];\n\n\t\t\tif(domStyle.refs === 0) {\n\t\t\t\tfor (var j = 0; j &lt; domStyle.parts.length; j++) domStyle.parts[j]();\n\n\t\t\t\tdelete stylesInDom[domStyle.id];\n\t\t\t}\n\t\t}\n\t};\n};\n\nfunction addStylesToDom (styles, options) {\n\tfor (var i = 0; i &lt; styles.length; i++) {\n\t\tvar item = styles[i];\n\t\tvar domStyle = stylesInDom[item.id];\n\n\t\tif(domStyle) {\n\t\t\tdomStyle.refs++;\n\n\t\t\tfor(var j = 0; j &lt; domStyle.parts.length; j++) {\n\t\t\t\tdomStyle.parts[j](item.parts[j]);\n\t\t\t}\n\n\t\t\tfor(; j &lt; item.parts.length; j++) {\n\t\t\t\tdomStyle.parts.push(addStyle(item.parts[j], options));\n\t\t\t}\n\t\t} else {\n\t\t\tvar parts = [];\n\n\t\t\tfor(var j = 0; j &lt; item.parts.length; j++) {\n\t\t\t\tparts.push(addStyle(item.parts[j], options));\n\t\t\t}\n\n\t\t\tstylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};\n\t\t}\n\t}\n}\n\nfunction listToStyles (list, options) {\n\tvar styles = [];\n\tvar newStyles = {};\n\n\tfor (var i = 0; i &lt; list.length; i++) {\n\t\tvar item = list[i];\n\t\tvar id = options.base ? item[0] + options.base : item[0];\n\t\tvar css = item[1];\n\t\tvar media = item[2];\n\t\tvar sourceMap = item[3];\n\t\tvar part = {css: css, media: media, sourceMap: sourceMap};\n\n\t\tif(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});\n\t\telse newStyles[id].parts.push(part);\n\t}\n\n\treturn styles;\n}\n\nfunction insertStyleElement (options, style) {\n\tvar target = getElement(options.insertInto)\n\n\tif (!target) {\n\t\tthrow new Error(&quot;Couldn\'t find a style target. This probably means that the value for the \'insertInto\' parameter is invalid.&quot;);\n\t}\n\n\tvar lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];\n\n\tif (options.insertAt === &quot;top&quot;) {\n\t\tif (!lastStyleElementInsertedAtTop) {\n\t\t\ttarget.insertBefore(style, target.firstChild);\n\t\t} else if (lastStyleElementInsertedAtTop.nextSibling) {\n\t\t\ttarget.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);\n\t\t} else {\n\t\t\ttarget.appendChild(style);\n\t\t}\n\t\tstylesInsertedAtTop.push(style);\n\t} else if (options.insertAt === &quot;bottom&quot;) {\n\t\ttarget.appendChild(style);\n\t} else if (typeof options.insertAt === &quot;object&quot; &amp;&amp; options.insertAt.before) {\n\t\tvar nextSibling = getElement(options.insertAt.before, target);\n\t\ttarget.insertBefore(style, nextSibling);\n\t} else {\n\t\tthrow new Error(&quot;[Style Loader]\\n\\n Invalid value for parameter \'insertAt\' (\'options.insertAt\') found.\\n Must be \'top\', \'bottom\', or Object.\\n (https://github.com/webpack-contrib/style-loader#insertat)\\n&quot;);\n\t}\n}\n\nfunction removeStyleElement (style) {\n\tif (style.parentNode === null) return false;\n\tstyle.parentNode.removeChild(style);\n\n\tvar idx = stylesInsertedAtTop.indexOf(style);\n\tif(idx &gt;= 0) {\n\t\tstylesInsertedAtTop.splice(idx, 1);\n\t}\n}\n\nfunction createStyleElement (options) {\n\tvar style = document.createElement(&quot;style&quot;);\n\n\tif(options.attrs.type === undefined) {\n\t\toptions.attrs.type = &quot;text/css&quot;;\n\t}\n\n\tif(options.attrs.nonce === undefined) {\n\t\tvar nonce = getNonce();\n\t\tif (nonce) {\n\t\t\toptions.attrs.nonce = nonce;\n\t\t}\n\t}\n\n\taddAttrs(style, options.attrs);\n\tinsertStyleElement(options, style);\n\n\treturn style;\n}\n\nfunction createLinkElement (options) {\n\tvar link = document.createElement(&quot;link&quot;);\n\n\tif(options.attrs.type === undefined) {\n\t\toptions.attrs.type = &quot;text/css&quot;;\n\t}\n\toptions.attrs.rel = &quot;stylesheet&quot;;\n\n\taddAttrs(link, options.attrs);\n\tinsertStyleElement(options, link);\n\n\treturn link;\n}\n\nfunction addAttrs (el, attrs) {\n\tObject.keys(attrs).forEach(function (key) {\n\t\tel.setAttribute(key, attrs[key]);\n\t});\n}\n\nfunction getNonce() {\n\tif (false) {}\n\n\treturn __webpack_require__.nc;\n}\n\nfunction addStyle (obj, options) {\n\tvar style, update, remove, result;\n\n\t// If a transform function was defined, run it on the css\n\tif (options.transform &amp;&amp; obj.css) {\n\t    result = typeof options.transform === \'function\'\n\t\t ? options.transform(obj.css) \n\t\t : options.transform.default(obj.css);\n\n\t    if (result) {\n\t    \t// If transform returns a value, use that instead of the original css.\n\t    \t// This allows running runtime transformations on the css.\n\t    \tobj.css = result;\n\t    } else {\n\t    \t// If the transform function returns a falsy value, don\'t add this css.\n\t    \t// This allows conditional loading of css\n\t    \treturn function() {\n\t    \t\t// noop\n\t    \t};\n\t    }\n\t}\n\n\tif (options.singleton) {\n\t\tvar styleIndex = singletonCounter++;\n\n\t\tstyle = singleton || (singleton = createStyleElement(options));\n\n\t\tupdate = applyToSingletonTag.bind(null, style, styleIndex, false);\n\t\tremove = applyToSingletonTag.bind(null, style, styleIndex, true);\n\n\t} else if (\n\t\tobj.sourceMap &amp;&amp;\n\t\ttypeof URL === &quot;function&quot; &amp;&amp;\n\t\ttypeof URL.createObjectURL === &quot;function&quot; &amp;&amp;\n\t\ttypeof URL.revokeObjectURL === &quot;function&quot; &amp;&amp;\n\t\ttypeof Blob === &quot;function&quot; &amp;&amp;\n\t\ttypeof btoa === &quot;function&quot;\n\t) {\n\t\tstyle = createLinkElement(options);\n\t\tupdate = updateLink.bind(null, style, options);\n\t\tremove = function () {\n\t\t\tremoveStyleElement(style);\n\n\t\t\tif(style.href) URL.revokeObjectURL(style.href);\n\t\t};\n\t} else {\n\t\tstyle = createStyleElement(options);\n\t\tupdate = applyToTag.bind(null, style);\n\t\tremove = function () {\n\t\t\tremoveStyleElement(style);\n\t\t};\n\t}\n\n\tupdate(obj);\n\n\treturn function updateStyle (newObj) {\n\t\tif (newObj) {\n\t\t\tif (\n\t\t\t\tnewObj.css === obj.css &amp;&amp;\n\t\t\t\tnewObj.media === obj.media &amp;&amp;\n\t\t\t\tnewObj.sourceMap === obj.sourceMap\n\t\t\t) {\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tupdate(obj = newObj);\n\t\t} else {\n\t\t\tremove();\n\t\t}\n\t};\n}\n\nvar replaceText = (function () {\n\tvar textStore = [];\n\n\treturn function (index, replacement) {\n\t\ttextStore[index] = replacement;\n\n\t\treturn textStore.filter(Boolean).join(\'\\n\');\n\t};\n})();\n\nfunction applyToSingletonTag (style, index, remove, obj) {\n\tvar css = remove ? &quot;&quot; : obj.css;\n\n\tif (style.styleSheet) {\n\t\tstyle.styleSheet.cssText = replaceText(index, css);\n\t} else {\n\t\tvar cssNode = document.createTextNode(css);\n\t\tvar childNodes = style.childNodes;\n\n\t\tif (childNodes[index]) style.removeChild(childNodes[index]);\n\n\t\tif (childNodes.length) {\n\t\t\tstyle.insertBefore(cssNode, childNodes[index]);\n\t\t} else {\n\t\t\tstyle.appendChild(cssNode);\n\t\t}\n\t}\n}\n\nfunction applyToTag (style, obj) {\n\tvar css = obj.css;\n\tvar media = obj.media;\n\n\tif(media) {\n\t\tstyle.setAttribute(&quot;media&quot;, media)\n\t}\n\n\tif(style.styleSheet) {\n\t\tstyle.styleSheet.cssText = css;\n\t} else {\n\t\twhile(style.firstChild) {\n\t\t\tstyle.removeChild(style.firstChild);\n\t\t}\n\n\t\tstyle.appendChild(document.createTextNode(css));\n\t}\n}\n\nfunction updateLink (link, options, obj) {\n\tvar css = obj.css;\n\tvar sourceMap = obj.sourceMap;\n\n\t/*\n\t\tIf convertToAbsoluteUrls isn\'t defined, but sourcemaps are enabled\n\t\tand there is no publicPath defined then lets turn convertToAbsoluteUrls\n\t\ton by default.  Otherwise default to the convertToAbsoluteUrls option\n\t\tdirectly\n\t*/\n\tvar autoFixUrls = options.convertToAbsoluteUrls === undefined &amp;&amp; sourceMap;\n\n\tif (options.convertToAbsoluteUrls || autoFixUrls) {\n\t\tcss = fixUrls(css);\n\t}\n\n\tif (sourceMap) {\n\t\t// http://stackoverflow.com/a/26603875\n\t\tcss += &quot;\\n/*# sourceMappingURL=data:application/json;base64,&quot; + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + &quot; */&quot;;\n\t}\n\n\tvar blob = new Blob([css], { type: &quot;text/css&quot; });\n\n\tvar oldSrc = link.href;\n\n\tlink.href = URL.createObjectURL(blob);\n\n\tif(oldSrc) URL.revokeObjectURL(oldSrc);\n}\n\n\n//# sourceURL=webpack:///./node_modules/style-loader/lib/addStyles.js?'
+    )
+  },
+
+  './node_modules/style-loader/lib/urls.js': function(module, exports) {
+    eval(
+      '\n/**\n * When source maps are enabled, `style-loader` uses a link element with a data-uri to\n * embed the css on the page. This breaks all relative urls because now they are relative to a\n * bundle instead of the current page.\n *\n * One solution is to only use full urls, but that may be impossible.\n *\n * Instead, this function &quot;fixes&quot; the relative urls to be absolute according to the current page location.\n *\n * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.\n *\n */\n\nmodule.exports = function (css) {\n  // get current location\n  var location = typeof window !== &quot;undefined&quot; &amp;&amp; window.location;\n\n  if (!location) {\n    throw new Error(&quot;fixUrls requires window.location&quot;);\n  }\n\n\t// blank or null?\n\tif (!css || typeof css !== &quot;string&quot;) {\n\t  return css;\n  }\n\n  var baseUrl = location.protocol + &quot;//&quot; + location.host;\n  var currentDir = baseUrl + location.pathname.replace(/\\/[^\\/]*$/, &quot;/&quot;);\n\n\t// convert each url(...)\n\t/*\n\tThis regular expression is just a way to recursively match brackets within\n\ta string.\n\n\t /url\\s*\\(  = Match on the word &quot;url&quot; with any whitespace after it and then a parens\n\t   (  = Start a capturing group\n\t     (?:  = Start a non-capturing group\n\t         [^)(]  = Match anything that isn\'t a parentheses\n\t         |  = OR\n\t         \\(  = Match a start parentheses\n\t             (?:  = Start another non-capturing groups\n\t                 [^)(]+  = Match anything that isn\'t a parentheses\n\t                 |  = OR\n\t                 \\(  = Match a start parentheses\n\t                     [^)(]*  = Match anything that isn\'t a parentheses\n\t                 \\)  = Match a end parentheses\n\t             )  = End Group\n              *\\) = Match anything and then a close parens\n          )  = Close non-capturing group\n          *  = Match anything\n       )  = Close capturing group\n\t \\)  = Match a close parens\n\n\t /gi  = Get all matches, not the first.  Be case insensitive.\n\t */\n\tvar fixedCss = css.replace(/url\\s*\\(((?:[^)(]|\\((?:[^)(]+|\\([^)(]*\\))*\\))*)\\)/gi, function(fullMatch, origUrl) {\n\t\t// strip quotes (if they exist)\n\t\tvar unquotedOrigUrl = origUrl\n\t\t\t.trim()\n\t\t\t.replace(/^&quot;(.*)&quot;$/, function(o, $1){ return $1; })\n\t\t\t.replace(/^\'(.*)\'$/, function(o, $1){ return $1; });\n\n\t\t// already a full url? no change\n\t\tif (/^(#|data:|http:\\/\\/|https:\\/\\/|file:\\/\\/\\/|\\s*$)/i.test(unquotedOrigUrl)) {\n\t\t  return fullMatch;\n\t\t}\n\n\t\t// convert the url to a full url\n\t\tvar newUrl;\n\n\t\tif (unquotedOrigUrl.indexOf(&quot;//&quot;) === 0) {\n\t\t  \t//TODO: should we add protocol?\n\t\t\tnewUrl = unquotedOrigUrl;\n\t\t} else if (unquotedOrigUrl.indexOf(&quot;/&quot;) === 0) {\n\t\t\t// path should be relative to the base url\n\t\t\tnewUrl = baseUrl + unquotedOrigUrl; // already starts with \'/\'\n\t\t} else {\n\t\t\t// path should be relative to current directory\n\t\t\tnewUrl = currentDir + unquotedOrigUrl.replace(/^\\.\\//, &quot;&quot;); // Strip leading \'./\'\n\t\t}\n\n\t\t// send back the fixed url(...)\n\t\treturn &quot;url(&quot; + JSON.stringify(newUrl) + &quot;)&quot;;\n\t});\n\n\t// send back the fixed css\n\treturn fixedCss;\n};\n\n\n//# sourceURL=webpack:///./node_modules/style-loader/lib/urls.js?'
+    )
+  },
+
+  './src/index.js': function(module, exports, __webpack_require__) {
+    eval(
+      '__webpack_require__(/*! ./style.css */ &quot;./src/style.css&quot;)\n__webpack_require__(/*! ./moduleA.js */ &quot;./src/moduleA.js&quot;)\nconst b = __webpack_require__(/*! ./moduleB.js */ &quot;./src/moduleB.js&quot;)\nconsole.log(1)\nsetTimeout(() =&gt; {\n  console.log(\'new b is running\')\n  b()\n}, 1000)\n\n\n//# sourceURL=webpack:///./src/index.js?'
+    )
+  },
+  './src/moduleA.js': function(module, exports) {
+    eval(
+      &quot;var newDiv = document.createElement('div') \nvar newContent = document.createTextNode(\&quot;Hi there! I'm module A!\&quot;)\nnewDiv.appendChild(newContent)\ndocument.body.appendChild(newDiv)\n\n//# sourceURL=webpack:///./src/moduleA.js?&quot;
+    )
+  },
+
+  './src/moduleB.js': function(module, exports) {
+    eval(
+      &quot;module.exports = function() {\n  var newDiv = document.createElement('div')\n  var newContent = document.createTextNode(\&quot;Hi there! I'm module B!\&quot;)\n  newDiv.appendChild(newContent)\n  document.body.appendChild(newDiv)\n}\n\n\n//# sourceURL=webpack:///./src/moduleB.js?&quot;
+    )
+  },
+
+  './src/style.css': function(module, exports, __webpack_require__) {
+    // 这里可以看到 css-loader 对css文件出的处理
+    // css的内容被保存到了  './node_modules/css-loader/dist/cjs.js!./src/style.css' 中
+    // './node_modules/style-loader/lib/addStyles.js'对应的函数则是将css插入html的逻辑
+    eval(
+      '\nvar content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js!./style.css */ &quot;./node_modules/css-loader/dist/cjs.js!./src/style.css&quot;);\n\nif(typeof content === \'string\') content = [[module.i, content, \'\']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {&quot;hmr&quot;:true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ &quot;./node_modules/style-loader/lib/addStyles.js&quot;)(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/style.css?'
+    )
+  }
+})
+
+
+</code></pre>
+<h1 id="编写简单的plugin">编写简单的Plugin</h1>
+<pre><code>一个最基础的Plugin的代码是这样的
+</code></pre>
+<pre><code>class BasicPlugin{
+  // 在构造函数中获取用户给该插件传入的配置
+  constructor(options){
+  }
+
+  // Webpack 会调用 BasicPlugin 实例的 apply 方法给插件实例传入 compiler 对象
+  apply(compiler){
+    compiler.plugin('compilation',function(compilation) {
+    })
+  }
+}
+
+// 导出 Plugin
+module.exports = BasicPlugin;
+
+</code></pre>
+<pre><code>使用这个plugin时、相关配置代码如下：
+</code></pre>
+<pre><code>const BasicPlugin = require('./BasicPlugin.js');
+module.export = {
+  plugins:[
+    new BasicPlugin(options),
+  ]
+}
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/jdF_Ikq8_">
+            <span class="flex-auto">模块化</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/ItmtA2Ryx">
+            <span class="flex-auto">webpack</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://yleexie.github.io/post/YDaqDF713">
+                <h3 class="post-title">
+                  JavaScript常见设计模式整理
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '26e86b8acd36313b1772',
+    clientSecret: 'c7fd619e3cde059a1e0815d515d06c0af2f6a5ff',
+    repo: 'YLeeXIE.github.io',
+    owner: 'YLeeXIE',
+    admin: ['YLeeXIE'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://yleexie.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
