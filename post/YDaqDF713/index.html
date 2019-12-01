@@ -3,14 +3,14 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>代码猿</title>
-<meta name="description" content="听闻远方有<b style="fontWeight:700">你</b>
-动身跋涉千里
-我吹过你吹过的风
-这算不算相拥
-我喜欢你
-从一而终
-认真且怂" />
-<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1575181379370">
+<meta name="description" content="听闻远方有你<br>
+动身跋涉千里<br>
+我吹过你吹过的风<br>
+这算不算相拥<br>
+我喜欢你<br>
+从一而终<br>
+认真且怂<br>" />
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1575196964177">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -30,7 +30,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://yleexie.github.io">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1575181379370" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1575196964177" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
       </div>
@@ -121,7 +121,7 @@
 <li>react-rudex connect函数</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>//装饰者模式
+<pre><code class="language-js">//装饰者模式
 //增加普通对象的功能
 
 function Sale(price) {
@@ -189,7 +189,7 @@ wear()
 // 穿上第三件衣服
 </code></pre>
 <p>这种方式有以下缺点: 1: 临时变量会变得越来越多；2: this 指向有时会出错</p>
-<pre><code>// AOP装饰函数
+<pre><code class="language-js">// AOP装饰函数
 // 前置代码
 Function.prototype.before = function(fn) {
   const self = this
@@ -210,7 +210,7 @@ Function.prototype.after = function(fn) {
 
 </code></pre>
 <p>用后置代码来实验下上面穿衣服的 demo,</p>
-<pre><code>const wear1 = function() {
+<pre><code class="language-js">const wear1 = function() {
   console.log('穿上第一件衣服')
 }
 
@@ -230,7 +230,7 @@ wear()
 // 穿上第三件衣服
 </code></pre>
 <p>但这样子有时会污染原生函数, 可以做点通变</p>
-<pre><code>const after = function(fn, afterFn) {
+<pre><code class="language-js">const after = function(fn, afterFn) {
   return function() {
     fn.apply(this, arguments)
     afterFn.apply(this, arguments)
@@ -252,7 +252,7 @@ wear()
 </ul>
 <p>👉  <strong>实现</strong></p>
 <p><a href="https://github.com/MuYunyun/waterfall/blob/0f229c1a2881d26166b92aa746b7f892af59c28f/waterfall.js#L8">瀑布流库实现代码</a></p>
-<pre><code>
+<pre><code class="language-js">
 //发布订阅模式
 //当发生一个感兴趣的事件时，将该事件通告给所有订阅者
 //形成对象之间的松散耦合
@@ -315,7 +315,7 @@ publisher.fire({type: 'call1'});  //call1 call1 again
 <li>弹框、全局缓存</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>//静态属性方式实现
+<pre><code class="language-js">//静态属性方式实现
 function Person() {
     if (typeof Person.instance === 'object') {
         return Person.instance;
@@ -354,7 +354,7 @@ console.log(p1 === p2);  //true
 <li>大量if语句</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>//策略模式
+<pre><code class="language-js">//策略模式
 //根据不同命令可以命中不同的算法
 
 var operate = {
@@ -380,7 +380,7 @@ calc('add', 1, 3);  //4
 calc('mul', 2, 4);  //8
 
 </code></pre>
-<pre><code>const S = function(salary) {
+<pre><code class="language-js">const S = function(salary) {
   return salary * 4
 }
 
@@ -410,7 +410,7 @@ calculateBonus(A, 10000) // 30000
 <li>图片预加载</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>// 虚拟代理实现图片预加载
+<pre><code class="language-js">// 虚拟代理实现图片预加载
 const myImage = (function() {
   const imgNode = document.createElement('img')
   document.body.appendChild(imgNode)
@@ -437,7 +437,7 @@ const proxyImage = (function() {
 proxyImage.setSrc('http://loaded.jpg')
 
 </code></pre>
-<pre><code>/代理模式
+<pre><code class="language-js">/代理模式
 //通过包装一个对象以控制对它的访问
 
 //以缓存代理为例
@@ -474,7 +474,7 @@ proxy.request(1);
 proxy.request(1);  //从缓存获取
 
 </code></pre>
-<pre><code>//  缓存代理实现乘积计算
+<pre><code class="language-js">//  缓存代理实现乘积计算
 const mult = function() {
   let a = 1
   for (let i = 0, l; l = arguments[i++];) {
@@ -510,7 +510,7 @@ proxyMult(1, 2, 3, 4) // 24
 <li>each([1,2,3],callback)</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>//迭代器模式
+<pre><code class="language-js">//迭代器模式
 //遍历某一个数据结构，这里以数组为例
 
 var iterator = (function () {
@@ -545,7 +545,7 @@ while(iterator.hasNext()) {
 <li>按钮和命令的分离</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>const setCommand = function(button, command) {
+<pre><code class="language-js">const setCommand = function(button, command) {
   button.onClick = function() {
     command.excute()
   }
@@ -582,7 +582,7 @@ setCommand(button1, updateCommand)
 <li>扫描文件夹</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>//    命令模式和组合模式的实现
+<pre><code class="language-js">//    命令模式和组合模式的实现
 const MacroCommand = function() {
   return {
     lists: [],
@@ -636,7 +636,7 @@ macroCommand.excute()
 // 打开空调
 // 打开电脑
 </code></pre>
-<pre><code>//   扫描文件夹
+<pre><code class="language-js">//   扫描文件夹
 const Folder = function(folder) {
   this.folder = folder
   this.lists = []
@@ -700,7 +700,7 @@ folder.scan()
 <li>泡茶与泡咖啡(大致过程一致、部分过程不一致)</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>const Drinks = function() {}
+<pre><code class="language-js">const Drinks = function() {}
 
 Drinks.prototype.firstStep = function() {
   console.log('烧开水')
@@ -818,7 +818,7 @@ Coffee.prototype.ifNeedFlavour = function() {
 <p>👉  <strong>场景</strong><br>
 +</p>
 <p>👉  <strong>实现</strong></p>
-<pre><code>// 一场测试结束后, 公布结果: 告知解答出题目的人挑战成功, 否则挑战失败。
+<pre><code class="language-js">// 一场测试结束后, 公布结果: 告知解答出题目的人挑战成功, 否则挑战失败。
 const player = function(name) {
   this.name = name
   playerMiddle.add(name)
@@ -886,7 +886,7 @@ c.lose()
 <p>👉  <strong>场景</strong><br>
 +</p>
 <p>👉  <strong>实现</strong></p>
-<pre><code>//  某某牌电灯, 按一下按钮打开弱光, 按两下按钮打开强光, 按三下按钮关闭灯光。
+<pre><code class="language-js">//  某某牌电灯, 按一下按钮打开弱光, 按两下按钮打开强光, 按三下按钮关闭灯光。
 // 将状态封装成不同类
 const weakLight = function(light) {
   this.light = light
@@ -943,7 +943,7 @@ light.init()
 // 打开强光
 // 关灯
 </code></pre>
-<pre><code>// 非面向对象实现的状态模式
+<pre><code class="language-js">// 非面向对象实现的状态模式
 // 借助于 JavaScript 的委托机制, 可以像如下实现状态模式:
 const obj = {
   'weakLight': {
@@ -993,7 +993,7 @@ light.init()
 <li>枚举接口变更</li>
 </ul>
 <p>👉  <strong>实现</strong></p>
-<pre><code>// 老接口
+<pre><code class="language-js">// 老接口
 const zhejiangCityOld = (function() {
   return [
     {

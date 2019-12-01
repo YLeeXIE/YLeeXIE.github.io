@@ -2,20 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yleexie.github.io</id>
     <title>代码猿</title>
-    <updated>2019-12-01T06:28:25.229Z</updated>
+    <updated>2019-12-01T10:43:52.444Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yleexie.github.io"/>
     <link rel="self" href="https://yleexie.github.io/atom.xml"/>
-    <subtitle>听闻远方有&lt;b style=&quot;fontWeight:700&quot;&gt;你&lt;/b&gt;
-动身跋涉千里
-我吹过你吹过的风
-这算不算相拥
-我喜欢你
-从一而终
-认真且怂</subtitle>
+    <subtitle>听闻远方有你&lt;br&gt;
+动身跋涉千里&lt;br&gt;
+我吹过你吹过的风&lt;br&gt;
+这算不算相拥&lt;br&gt;
+我喜欢你&lt;br&gt;
+从一而终&lt;br&gt;
+认真且怂&lt;br&gt;</subtitle>
     <logo>https://yleexie.github.io/images/avatar.png</logo>
     <icon>https://yleexie.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 代码猿</rights>
+    <entry>
+        <title type="html"><![CDATA[前端JavaScript中的方法实现原理]]></title>
+        <id>https://yleexie.github.io/post/cEvENrua0</id>
+        <link href="https://yleexie.github.io/post/cEvENrua0">
+        </link>
+        <updated>2019-12-01T06:48:06.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[WebPack原理解析]]></title>
         <id>https://yleexie.github.io/post/AjyJb9MfD</id>
@@ -78,12 +85,5 @@
         <link href="https://yleexie.github.io/post/TQG2fMrLX">
         </link>
         <updated>2019-10-10T17:00:29.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[瀑布流的布局原理分析（纯CSS瀑布流与JS瀑布流）]]></title>
-        <id>https://yleexie.github.io/post/E1jNUuZ9D</id>
-        <link href="https://yleexie.github.io/post/E1jNUuZ9D">
-        </link>
-        <updated>2019-10-10T15:58:39.000Z</updated>
     </entry>
 </feed>

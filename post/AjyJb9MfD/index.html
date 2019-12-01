@@ -3,14 +3,14 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>代码猿</title>
-<meta name="description" content="听闻远方有<b style="fontWeight:700">你</b>
-动身跋涉千里
-我吹过你吹过的风
-这算不算相拥
-我喜欢你
-从一而终
-认真且怂" />
-<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1575181379370">
+<meta name="description" content="听闻远方有你<br>
+动身跋涉千里<br>
+我吹过你吹过的风<br>
+这算不算相拥<br>
+我喜欢你<br>
+从一而终<br>
+认真且怂<br>" />
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1575196964177">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -30,7 +30,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://yleexie.github.io">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1575181379370" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1575196964177" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
       </div>
@@ -120,7 +120,7 @@
 <p><a href="https://webpack.js.org/concepts/entry-points/">详细内容</a></p>
 <h1 id="输出output">输出(output)</h1>
 <p><code>output</code>属性将告诉<code>webpack</code>最终打包文件的输出路径、以及如何命名打包文件</p>
-<pre><code>const path = require('path');
+<pre><code class="language-js">const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -150,7 +150,7 @@ module.exports = {
 
 重置顺序: 一组loader的执行顺序迷人是从右向左执行,通过 enforce 选项可以让其中一个loader的执行顺序放到最后或最前
 </code></pre>
-<pre><code>    const path = require('path');
+<pre><code class="language-js">    const path = require('path');
 
 module.exports = {
   output: {
@@ -188,7 +188,7 @@ module.exports = {
 <p><code>loaders</code>用来转换某些类型的模块(文件)、<code>plugin</code>则用来执行、打包优化、资源管理和插入环境变量等各种任务。</p>
 <p><code>plugins</code>是用来扩展<code>webpack</code>功能的、通过在构建流程里注入钩子实现、它给<code>webpack</code>带来了很大的灵活性</p>
 <p>通过<code>require</code>引入插件、并将其实例化的对象加入<code>plugin</code>中</p>
-<pre><code>const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
+<pre><code class="language-js">const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
 
 module.exports = {
@@ -234,7 +234,7 @@ module.exports = {
 <h1 id="输出文件分析">输出文件分析</h1>
 <pre><code>webpack配置
 </code></pre>
-<pre><code>const path = require('path')
+<pre><code class="language-js">const path = require('path')
 // Since webpack 4 the &quot;extract-text-webpack-plugin&quot; should not be used for css.
 // Use &quot;mini-css-extract-plugin&quot; instead
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -305,7 +305,7 @@ module.exports = merge(common, other)
 </code></pre>
 <pre><code>index.html
 </code></pre>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
   &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot; /&gt;
@@ -319,7 +319,7 @@ module.exports = merge(common, other)
 </code></pre>
 <pre><code>index.js
 </code></pre>
-<pre><code> require('./style.css')
+<pre><code class="language-js"> require('./style.css')
 require('./moduleA.js')
 const b = require('./moduleB.js')
 setTimeout(() =&gt; {
@@ -330,7 +330,7 @@ setTimeout(() =&gt; {
 </code></pre>
 <pre><code>moduleA.js
 </code></pre>
-<pre><code>var newDiv = document.createElement('div') 
+<pre><code class="language-js">var newDiv = document.createElement('div') 
 var newContent = document.createTextNode(&quot;Hi there! I'm module A!&quot;)
 newDiv.appendChild(newContent)
 document.body.appendChild(newDiv)
@@ -338,7 +338,7 @@ document.body.appendChild(newDiv)
 </code></pre>
 <pre><code>moduleB.js
 </code></pre>
-<pre><code>module.exports = function() {
+<pre><code class="language-js">module.exports = function() {
   var newDiv = document.createElement('div')
   var newContent = document.createTextNode(&quot;Hi there! I'm module B!&quot;)
   newDiv.appendChild(newContent)
@@ -348,13 +348,13 @@ document.body.appendChild(newDiv)
 </code></pre>
 <pre><code>style.css
 </code></pre>
-<pre><code>body {
+<pre><code class="language-css">body {
     background: pink;
 }
 </code></pre>
 <pre><code>webpack.config.js
 </code></pre>
-<pre><code>// webpack.config.js
+<pre><code class="language-js">// webpack.config.js
 // entry的参数是String
 module.exports = {
   entry: './src/index.js'  // 这是默认值,当然可以自定义
@@ -398,7 +398,7 @@ module.exports = {
 </code></pre>
 <pre><code>打包之后的文件
 </code></pre>
-<pre><code>;(function(modules) {
+<pre><code class="language-js">;(function(modules) {
   // webpackBootstrap
   // The module cache
   var installedModules = {}
@@ -583,7 +583,7 @@ module.exports = {
 <h1 id="编写简单的plugin">编写简单的Plugin</h1>
 <pre><code>一个最基础的Plugin的代码是这样的
 </code></pre>
-<pre><code>class BasicPlugin{
+<pre><code class="language-js">class BasicPlugin{
   // 在构造函数中获取用户给该插件传入的配置
   constructor(options){
   }
@@ -601,7 +601,7 @@ module.exports = BasicPlugin;
 </code></pre>
 <pre><code>使用这个plugin时、相关配置代码如下：
 </code></pre>
-<pre><code>const BasicPlugin = require('./BasicPlugin.js');
+<pre><code class="language-js">const BasicPlugin = require('./BasicPlugin.js');
 module.export = {
   plugins:[
     new BasicPlugin(options),
@@ -623,6 +623,15 @@ module.export = {
 
 
         <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://yleexie.github.io/post/cEvENrua0">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  前端JavaScript中的方法实现原理
+                </h3>
+              </a>
+            </div>
           
 
           
