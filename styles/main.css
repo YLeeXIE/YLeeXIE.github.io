@@ -5836,7 +5836,7 @@ pre[class*="language-"] {
 }
 pre[class*="language-"],
 :not(pre) > code[class*="language-"] {
-  background: hsl(0, 0%, 8%);
+  background: #282A36;
   /* #141414 */
 }
 /* Code blocks */
@@ -5889,8 +5889,17 @@ code[class*="language-"] ::selection {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: hsl(0, 0%, 47%);
+  color: #6272a4;
   /* #777777 */
+}
+.token.method.function.property-access {
+  color: #66d9ef;
+}
+.token.function {
+  color: #fff !important;
+}
+.token.function-variable {
+  color: #50fa7b;
 }
 .token.punctuation {
   opacity: 0.7;
@@ -5902,8 +5911,14 @@ code[class*="language-"] ::selection {
 .token.boolean,
 .token.number,
 .token.deleted {
-  color: hsl(14, 58%, 55%);
+  color: #bd93f9;
   /* #CF6A4C */
+}
+.token.class-name {
+  color: #ffffff;
+}
+.token.keyword.nil {
+  color: #bd93f9;
 }
 .token.keyword,
 .token.property,
@@ -5911,21 +5926,23 @@ code[class*="language-"] ::selection {
 .token.constant,
 .token.symbol,
 .token.builtin {
-  color: hsl(53, 89%, 79%);
+  color: #ff79c6;
   /* #F9EE98 */
+}
+.token.operator {
+  color: #ff79c6;
 }
 .token.attr-name,
 .token.attr-value,
 .token.string,
 .token.char,
-.token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
 .style .token.string,
 .token.variable,
 .token.inserted {
-  color: hsl(76, 21%, 52%);
+  color: #f1fa8c;
   /* #8F9D6A */
 }
 .token.atrule {
@@ -5946,6 +5963,10 @@ code[class*="language-"] ::selection {
 }
 .token.entity {
   cursor: help;
+}
+.token.function,
+.token.function-variable {
+  color: #50fa7b !important;
 }
 pre[data-line] {
   padding: 1em 0 1em 3em;
@@ -6180,7 +6201,7 @@ pre[data-line] {
   color: #888888;
   font-size: 0.96em;
   padding: 1px 2px;
-  font-family: Menlo,Monaco,Consolas,Courier New,monospace;
+  font-family: "Fira Code", monospace !important;
   word-wrap: break-word;
 }
 .yue pre {
@@ -6193,7 +6214,7 @@ pre[data-line] {
   border-radius: 0.5rem;
   box-shadow: 1px 1px 0.5em black inset;
   padding: 1em;
-  background: hsl(0, 0%, 8%);
+  background: #282A36;
 }
 .yue pre code,
 .yue pre tt {
