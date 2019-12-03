@@ -10,7 +10,7 @@
 我喜欢你<br>
 从一而终<br>
 认真且怂<br>" />
-<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1575345002594">
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1575364677153">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -30,7 +30,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://yleexie.github.io">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1575345002594" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1575364677153" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
       </div>
@@ -43,8 +43,69 @@
             <ul class="markdownIt-TOC">
 <li><a href="#typeof-%E4%B8%8E-instanceof">typeOf 与 instanceOf</a>
 <ul>
-<li><a href="#typeof-vs-instanceof">typeof vs instanceof</a></li>
-<li><a href="#">#</a></li>
+<li><a href="#instanceof-%E7%9A%84%E5%8E%9F%E7%90%86">instanceof 的原理</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D-vs-%E6%B5%85%E6%8B%B7%E8%B4%9D">深拷贝 vs 浅拷贝</a>
+<ul>
+<li><a href="#%E6%B5%85%E6%8B%B7%E8%B4%9D">浅拷贝</a></li>
+<li><a href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D">深拷贝</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%A7%E6%89%BF">继承</a>
+<ul>
+<li><a href="#%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF">组合继承</a></li>
+<li><a href="#%E5%AF%84%E7%94%9F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF">寄生组合继承</a></li>
+<li><a href="#class%E7%BB%A7%E6%89%BF">Class继承</a></li>
+</ul>
+</li>
+<li><a href="#promise">Promise</a>
+<ul>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E7%89%88-promise">实现一个简易版 Promise</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AC%A6%E5%90%88-promisea-%E8%A7%84%E8%8C%83%E7%9A%84-promise">实现一个符合 Promise/A+ 规范的 Promise</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+</ul>
+</li>
+<li><a href="#call-apply-%E5%8F%8A-bind-%E5%87%BD%E6%95%B0">call、apply 及 bind 函数</a></li>
+<li><a href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6">垃圾回收机制</a>
+<ul>
+<li><a href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E7%AE%97%E6%B3%95">新生代算法</a></li>
+<li><a href="#%E8%80%81%E7%94%9F%E4%BB%A3%E7%AE%97%E6%B3%95">老生代算法</a></li>
+</ul>
+</li>
+<li><a href="#%E8%8A%82%E6%B5%81-vs-%E9%98%B2%E6%8A%96">节流 VS 防抖</a>
+<ul>
+<li><a href="#%E8%8A%82%E6%B5%81">节流</a></li>
+<li><a href="#%E9%98%B2%E6%8A%96">防抖</a></li>
+</ul>
+</li>
+<li><a href="#nexttick-%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90">NextTick 原理分析</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">时间复杂度</a>
+<ul>
+<li><a href="#%E6%A0%88">栈</a>
+<ul>
+<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
+</ul>
+</li>
+<li><a href="#%E9%98%9F%E5%88%97">队列</a>
+<ul>
+<li><a href="#%E5%AE%9E%E7%8E%B0-2">实现</a></li>
+</ul>
+</li>
+<li><a href="#%E9%93%BE%E8%A1%A8">链表</a>
+<ul>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0-3">实现</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A0%91">树</a>
+<ul>
+<li><a href="#%E4%BA%8C%E5%8F%89%E6%A0%91">二叉树</a></li>
+<li><a href="#%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E6%A0%91">二分搜索树</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0-4">实现</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -95,18 +156,15 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">前端JavaScript中的方法实现原理</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2019-12-01 / 2 min read
+          2019-12-01 / 41 min read
         </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://user-gold-cdn.xitu.io/2019/12/1/16ebf72d364e2cee?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="">
         
         <div class="post-content yue">
           <p>最近工作比较忙、抽不出时间更新博客！趁着假期双休总结一下js中一些比较常用的方法实现原理</p>
 <h1 id="typeof-与-instanceof">typeOf 与 instanceOf</h1>
 <p><code>typeof</code> 对于原始类型来说，除了<code>null</code> 都可以显示正确的类型</p>
-<h2 id="typeof-vs-instanceof">typeof vs instanceof</h2>
-<blockquote>
-<p>涉及面试题：typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？</p>
-</blockquote>
-<p><code>typeof</code> 对于原始类型来说，除了 <code>null</code> 都可以显示正确的类型</p>
 <pre><code class="language-js">typeof 1 // 'number'
 typeof '1' // 'string'
 typeof undefined // 'undefined'
@@ -118,7 +176,7 @@ typeof Symbol() // 'symbol'
 typeof {} // 'object'
 typeof console.log // 'function'
 </code></pre>
-<p>如果我们想判断一个对象的正确类型，这时候可以考虑使用 <code>instanceof</code>，因为内部机制是通过原型链来判断的，在后面的章节中我们也会自己去实现一个 <code>instanceof</code>。</p>
+<p>如果我们想判断一个对象的正确类型，这时候可以考虑使用 <code>instanceof</code>，因为内部机制是通过原型链来判断的，在下面我们也会自己去实现一个 <code>instanceof</code>。</p>
 <pre><code class="language-js">const Person = function() {}
 const p1 = new Person()
 p1 instanceof Person // true
@@ -137,11 +195,1215 @@ str1 instanceof String // true
 }
 console.log('hello world' instanceof PrimitiveString) // true
 </code></pre>
+<h2 id="instanceof-的原理">instanceof 的原理</h2>
+<p><code>instanceof</code> 可以正确的判断对象的类型，因为内部机制是通过判断对象的原型链中是不是能找到类型的 <code>prototype</code>.</p>
+<p>我们也可以试着实现一下 <code>instanceof</code></p>
+<pre><code class="language-js">function myInstanceof(left, right) {
+  let prototype = right.prototype
+  left = left.__proto__
+  while (true) {
+    if (left === null || left === undefined)
+      return false
+    if (prototype === left)
+      return true
+    left = left.__proto__
+  }
+}
+</code></pre>
+<p>以下是对实现的分析：</p>
+<ul>
+<li>首先获取类型的原型</li>
+<li>然后获得对象的原型</li>
+<li>然后一直循环判断对象的原型是否等于类型的原型，直到对象原型为<code>null</code>，因为原型链最终为 <code>null</code></li>
+</ul>
 <p>你可能不知道 <code>Symbol.hasInstance</code> 是什么东西，其实就是一个能让我们自定义 <code>instanceof</code> 行为的东西，以上代码等同于 <code>typeof 'hello world' === 'string'</code>，所以结果自然是 <code>true</code> 了。这其实也侧面反映了一个问题， <code>instanceof</code> 也不是百分之百可信的。</p>
-<h2 id=""><a href="http://blog.zhangximufeng.cn/interview/#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">#</a>类型转换</h2>
+<h1 id="深拷贝-vs-浅拷贝">深拷贝 vs 浅拷贝</h1>
+<p>首先我们来看一段代码、对象类型在赋值的过程中其实是复制了地址，从而会导致改变了一方其他也都被改变的情况。通常在开发中我们不希望出现这样的问题，我们可以使用浅拷贝来解决这个情况。</p>
+<pre><code class="language-js">let a = {
+  age: 1
+}
+let b = a
+a.age = 2
+console.log(b.age) // 2
+</code></pre>
+<h2 id="浅拷贝">浅拷贝</h2>
+<p>首先可以通过 <code>Object.assign</code>来解决这个问题，很多人认为这个函数是用来深拷贝的。其实并不是，<code>Object.assign</code> 只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。</p>
+<pre><code class="language-js">let a = {
+  age: 1
+}
+let b = Object.assign({}, a)
+a.age = 2
+console.log(b.age) // 1
+</code></pre>
+<p>另外我们还可以通过展开运算符 ... 来实现浅拷贝</p>
+<pre><code class="language-js">let a = {
+  age: 1
+}
+let b = { ...a }
+a.age = 2
+console.log(b.age) // 1
+</code></pre>
+<p>通常浅拷贝就能解决大部分问题了，但是当我们遇到如下情况就可能需要使用到深拷贝了</p>
+<pre><code class="language-js">let a = {
+  age: 1,
+  jobs: {
+    first: 'FE'
+  }
+}
+let b = { ...a }
+a.jobs.first = 'native'
+console.log(b.jobs.first) // native
+</code></pre>
+<p>浅拷贝只解决了第一层的问题，如果接下去的值中还有对象的话，那么就又回到最开始的话题了，两者享有相同的地址。要解决这个问题，我们就得使用深拷贝了</p>
+<h2 id="深拷贝">深拷贝</h2>
+<p>这个问题通常可以通过 <code>JSON.parse(JSON.stringify(object))</code> 来解决。</p>
+<pre><code class="language-js">let a = {
+  age: 1,
+  jobs: {
+    first: 'FE'
+  }
+}
+let b = JSON.parse(JSON.stringify(a))
+a.jobs.first = 'native'
+console.log(b.jobs.first) // FE
+</code></pre>
+<p>但是该方法也是有局限性的：</p>
+<ul>
+<li>会忽略<code>undefined</code></li>
+<li>会忽略 <code>symbol</code></li>
+<li>不能序列化函数</li>
+<li>不能解决循环引用的对象</li>
+</ul>
+<pre><code class="language-js">let obj = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3,
+  },
+}
+obj.c = obj.b
+obj.e = obj.a
+obj.b.c = obj.c
+obj.b.d = obj.b
+obj.b.e = obj.b.c
+let newObj = JSON.parse(JSON.stringify(obj))
+console.log(newObj)
+</code></pre>
+<p>如果你有这么一个循环引用对象，你会发现并不能通过该方法实现深拷贝<br>
+<img src="https://user-gold-cdn.xitu.io/2018/3/28/1626b1ec2d3f9e41?imageView2/0/w/1280/h/960/format/ignore-error/1"><br>
+在遇到函数、<code>undefined</code>或者<code>symbol</code>的时候，该对象也不能正常的序列化</p>
+<pre><code class="language-js">let a = {
+  age: undefined,
+  sex: Symbol('male'),
+  jobs: function() {},
+  name: 'zhangximufeng'
+}
+let b = JSON.parse(JSON.stringify(a))
+console.log(b) // {name: &quot;zhangximufeng&quot;}
+</code></pre>
+<p>你会发现在上述情况中，该方法会忽略掉函数和<code>undefined</code>。</p>
+<p>但是在通常情况下，复杂数据都是可以序列化的，所以这个函数可以解决大部分问题。</p>
+<p>如果你所需拷贝的对象含有内置类型并且不包含函数，可以使用 <code>MessageChannel</code></p>
+<pre><code class="language-js">function structuralClone(obj) {
+  return new Promise(resolve =&gt; {
+    const { port1, port2 } = new MessageChannel()
+    port2.onmessage = ev =&gt; resolve(ev.data)
+    port1.postMessage(obj)
+  })
+}
+
+var obj = {
+  a: 1,
+  b: {
+    c: 2
+  }
+}
+
+obj.b.d = obj.b
+
+// 注意该方法是异步的
+// 可以处理 undefined 和循环引用对象
+const test = async () =&gt; {
+  const clone = await structuralClone(obj)
+  console.log(clone)
+}
+test()
+</code></pre>
+<p>当然你可能想自己来实现一个深拷贝，但是其实实现一个深拷贝是很困难的，需要我们考虑好多种边界情况，比如原型链如何处理、DOM 如何处理等等，所以这里我们实现的深拷贝只是简易版，并且我其实更推荐使用 <a href="https://www.lodashjs.com/docs/latest#_clonedeepvalue">&quot;lodash&quot;</a> 的深拷贝函数。</p>
+<pre><code class="language-js">function deepClone(obj) {
+  function isObject(o) {
+    return (typeof o === 'object' || typeof o === 'function') &amp;&amp; o !== null
+  }
+
+  if (!isObject(obj)) {
+    throw new Error('非对象')
+  }
+
+  let isArray = Array.isArray(obj)
+  let newObj = isArray ? [...obj] : { ...obj }
+  Reflect.ownKeys(newObj).forEach(key =&gt; {
+    newObj[key] = isObject(obj[key]) ? deepClone(obj[key]) : obj[key]
+  })
+
+  return newObj
+}
+
+let obj = {
+  a: [1, 2, 3],
+  b: {
+    c: 2,
+    d: 3
+  }
+}
+let newObj = deepClone(obj)
+newObj.b.c = 1
+console.log(obj.b.c) // 2
+</code></pre>
+<h1 id="继承">继承</h1>
+<p>首先先来讲下<code>class</code>，其实在 <code>JS</code> 中并不存在类，<code>class</code>只是语法糖，本质还是函数。</p>
+<pre><code class="language-js">class Person {}
+Person instanceof Function // true
+</code></pre>
+<h2 id="组合继承">组合继承</h2>
+<p>组合继承是最常用的继承方式</p>
+<pre><code class="language-js">function Parent(value) {
+  this.val = value
+}
+Parent.prototype.getValue = function() {
+  console.log(this.val)
+}
+function Child(value) {
+  Parent.call(this, value)
+}
+Child.prototype = new Parent()
+
+const child = new Child(1)
+
+child.getValue() // 1
+child instanceof Parent // true
+</code></pre>
+<p>以上继承的方式核心是在子类的构造函数中通过<code>Parent.call(this)</code>继承父类的属性，然后改变子类的原型为 <code>new Parent()</code>来继承父类的函数。</p>
+<p>这种继承方式优点在于构造函数可以传参，不会与父类引用属性共享，可以复用父类的函数，但是也存在一个缺点就是在继承父类函数的时候调用了父类构造函数，导致子类的原型上多了不需要的父类属性，存在内存上的浪费。<br>
+<img src="https://user-gold-cdn.xitu.io/2018/11/19/1672aeb24a2e2cae?imageView2/0/w/1280/h/960/format/ignore-error/1"></p>
+<h2 id="寄生组合继承">寄生组合继承</h2>
+<p>这种继承方式对组合继承进行了优化，组合继承缺点在于继承父类函数时调用了构造函数，我们只需要优化掉这点就行了</p>
+<pre><code class="language-js">function Parent(value) {
+  this.val = value
+}
+Parent.prototype.getValue = function() {
+  console.log(this.val)
+}
+
+function Child(value) {
+  Parent.call(this, value)
+}
+Child.prototype = Object.create(Parent.prototype, {
+  constructor: {
+    value: Child,
+    enumerable: false,
+    writable: true,
+    configurable: true
+  }
+})
+
+const child = new Child(1)
+
+child.getValue() // 1
+child instanceof Parent // true
+</code></pre>
+<p>以上继承实现的核心就是将父类的原型赋值给了子类，并且将构造函数设置为子类，这样既解决了无用的父类属性问题，还能正确的找到子类的构造函数。<br>
+<img src="https://user-gold-cdn.xitu.io/2018/11/19/1672afb8dfa21361?imageView2/0/w/1280/h/960/format/ignore-error/1"></p>
+<h2 id="class继承">Class继承</h2>
+<p>以上两种继承方式都是通过原型去解决的，在 <code>ES6</code> 中，我们可以使用 <code>class</code>去实现继承，并且实现起来很简单</p>
+<pre><code class="language-js">class Parent {
+  constructor(value) {
+    this.val = value
+  }
+  getValue() {
+    console.log(this.val)
+  }
+}
+class Child extends Parent {
+  constructor(value) {
+    super(value)
+    this.val = value
+  }
+}
+let child = new Child(1)
+child.getValue() // 1
+child instanceof Parent // true
+</code></pre>
+<p><code>class</code> 实现继承的核心在于使用<code>extends</code> 表明继承自哪个父类，并且在子类构造函数中必须调用 <code>super</code>，因为这段代码可以看成<code>Parent.call(this, value)</code>。</p>
+<p>当然了，之前也说了在<code>JS</code> 中并不存在类，<code>class</code>的本质就是函数.</p>
+<h1 id="promise">Promise</h1>
+<p><code>Promise</code> 翻译过来就是承诺的意思，这个承诺会在未来有一个确切的答复，并且该承诺有三种状态，分别是：</p>
+<ol>
+<li>等待中（pending）</li>
+<li>完成了 （resolved）</li>
+<li>拒绝了（rejected）<br>
+这个承诺一旦从等待状态变成为其他状态就永远不能更改状态了，也就是说一旦状态变为 <code>resolved</code>后，就不能再次改变</li>
+</ol>
+<pre><code class="language-js">new Promise((resolve, reject) =&gt; {
+  resolve('success')
+  // 无效
+  reject('reject')
+})
+</code></pre>
+<p>当我们在构造<code>Promise</code>的时候，构造函数内部的代码是立即执行的</p>
+<pre><code class="language-js">new Promise((resolve, reject) =&gt; {
+  console.log('new Promise')
+  resolve('success')
+})
+console.log('finifsh')
+// new Promise -&gt; finifsh
+</code></pre>
+<p><code>Promise</code>实现了链式调用，也就是说每次调用<code>then</code>之后返回的都是一个 <code>Promise</code>，并且是一个全新的 <code>Promise</code>，原因也是因为状态不可变。如果你在 <code>then</code>中 使用了<code>return</code>，那么<code>return</code> 的值会被<code>Promise.resolve()</code> 包装</p>
+<pre><code class="language-js">Promise.resolve(1)
+  .then(res =&gt; {
+    console.log(res) // =&gt; 1
+    return 2 // 包装成 Promise.resolve(2)
+  })
+  .then(res =&gt; {
+    console.log(res) // =&gt; 2
+  })
+</code></pre>
+<p>当然了，<code>Promise</code>也很好地解决了回调地狱的问题，可以把之前的回调地狱例子改写为如下代码：</p>
+<pre><code class="language-js">ajax(url)
+.then(res =&gt; {
+    console.log(res)
+    return ajax(url1)
+}).then(res =&gt; {
+    console.log(res)
+    return ajax(url2)
+}).then(res =&gt; console.log(res))
+</code></pre>
+<p>前面都是在讲述<code>Promise</code>的一些优点和特点，其实它也是存在一些缺点的，比如无法取消 <code>Promise</code>，错误需要通过回调函数捕获。</p>
+<h2 id="实现一个简易版-promise">实现一个简易版 Promise</h2>
+<p>在完成符合<code>Promise/A+</code>规范的代码之前，我们可以先来实现一个简易版 <code>Promise</code>，因为在面试中，如果你能实现出一个简易版的 <code>Promise</code>基本可以过关了。</p>
+<p>那么我们先来搭建构建函数的大体框架</p>
+<pre><code class="language-js">const PENDING = 'pending'
+const RESOLVED = 'resolved'
+const REJECTED = 'rejected'
+
+function MyPromise(fn) {
+  const that = this
+  that.state = PENDING
+  that.value = null
+  that.resolvedCallbacks = []
+  that.rejectedCallbacks = []
+  // 待完善 resolve 和 reject 函数
+  // 待完善执行 fn 函数
+}
+</code></pre>
+<ul>
+<li>首先我们创建了三个常量用于表示状态，对于经常使用的一些值都应该通过常量来管理，便于开发及后期维护</li>
+<li>在函数体内部首先创建了常量 <code>that</code>，因为代码可能会异步执行，用于获取正确的 <code>this</code> 对象</li>
+<li>一开始<code>Promise</code> 的状态应该是 <code>pending</code></li>
+<li><code>value</code> 变量用于保存 <code>resolve</code> 或者<code>reject</code> 中传入的值</li>
+<li><code>resolvedCallbacks</code> 和 <code>rejectedCallbacks</code> 用于保存<code>then</code>中的回调，因为当执行完 Promise 时状态可能还是等待中，这时候应该把<code>then</code> 中的回调保存起来用于状态改变时使用<br>
+接下来我们来完善 <code>resolve</code> 和 <code>reject</code> 函数，添加在 <code>MyPromise</code> 函数体内部</li>
+</ul>
+<pre><code class="language-js">function resolve(value) {
+  if (that.state === PENDING) {
+    that.state = RESOLVED
+    that.value = value
+    that.resolvedCallbacks.map(cb =&gt; cb(that.value))
+  }
+}
+
+function reject(value) {
+  if (that.state === PENDING) {
+    that.state = REJECTED
+    that.value = value
+    that.rejectedCallbacks.map(cb =&gt; cb(that.value))
+  }
+}
+</code></pre>
+<p>这两个函数代码类似，就一起解析了</p>
+<pre><code>- 首先两个函数都得判断当前状态是否为等待中，因为规范规定只有等待态才可以改变状态
+- 将当前状态更改为对应状态，并且将传入的值赋值给 `value`
+- 遍历回调数组并执行
+</code></pre>
+<p>完成以上两个函数以后，我们就该实现如何执行<code>Promise</code> 中传入的函数了</p>
+<pre><code class="language-js">try {
+  fn(resolve, reject)
+} catch (e) {
+  reject(e)
+}
+</code></pre>
+<ul>
+<li>实现很简单，执行传入的参数并且将之前两个函数当做参数传进去</li>
+<li>要注意的是，可能执行函数过程中会遇到错误，需要捕获错误并且执行<code>reject</code> 函数<br>
+最后我们来实现较为复杂的<code>then</code> 函数</li>
+</ul>
+<pre><code class="language-js">MyPromise.prototype.then = function(onFulfilled, onRejected) {
+  const that = this
+  onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v =&gt; v
+  onRejected =
+    typeof onRejected === 'function'
+      ? onRejected
+      : r =&gt; {
+          throw r
+        }
+  if (that.state === PENDING) {
+    that.resolvedCallbacks.push(onFulfilled)
+    that.rejectedCallbacks.push(onRejected)
+  }
+  if (that.state === RESOLVED) {
+    onFulfilled(that.value)
+  }
+  if (that.state === REJECTED) {
+    onRejected(that.value)
+  }
+}
+</code></pre>
+<ul>
+<li>
+<p>首先判断两个参数是否为函数类型，因为这两个参数是可选参数</p>
+</li>
+<li>
+<p>当参数不是函数类型时，需要创建一个函数赋值给对应的参数，同时也实现了透传，比如如下代码</p>
+<pre><code class="language-js">// 该代码目前在简单版中会报错
+</code></pre>
+</li>
+</ul>
+<p>// 只是作为一个透传的例子<br>
+Promise.resolve(4).then().then((value) =&gt; console.log(value))</p>
+<pre><code>- 接下来就是一系列判断状态的逻辑，当状态不是等待态时，就去执行相对应的函数。如果状态是等待态的话，就往回调函数中 push 函数，比如如下代码就会进入等待态的逻辑
+```js
+new MyPromise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; {
+    resolve(1)
+  }, 0)
+}).then(value =&gt; {
+  console.log(value)
+})
+</code></pre>
+<p>以上就是简单版 <code>Promise</code>实现，接下来一小节是实现完整版 <code>Promise</code> 的解析，相信看完完整版的你，一定会对于<code>Promise</code> 的理解更上一层楼。</p>
+<h2 id="实现一个符合-promisea-规范的-promise">实现一个符合 Promise/A+ 规范的 Promise</h2>
+<p>这小节代码需要大家配合规范阅读，因为大部分代码都是根据规范去实现的。</p>
+<p>我们先来改造一下 <code>resolve</code>和 <code>reject</code>函数</p>
+<pre><code class="language-js">function resolve(value) {
+  if (value instanceof MyPromise) {
+    return value.then(resolve, reject)
+  }
+  setTimeout(() =&gt; {
+    if (that.state === PENDING) {
+      that.state = RESOLVED
+      that.value = value
+      that.resolvedCallbacks.map(cb =&gt; cb(that.value))
+    }
+  }, 0)
+}
+function reject(value) {
+  setTimeout(() =&gt; {
+    if (that.state === PENDING) {
+      that.state = REJECTED
+      that.value = value
+      that.rejectedCallbacks.map(cb =&gt; cb(that.value))
+    }
+  }, 0)
+}
+</code></pre>
+<ul>
+<li>对于<code>resolve</code> 函数来说，首先需要判断传入的值是否为<code>Promise</code>类型</li>
+<li>为了保证函数执行顺序，需要将两个函数体代码使用 <code>setTimeout</code>包裹起来<br>
+接下来继续改造<code>then</code>函数中的代码，首先我们需要新增一个变量 <code>promise2</code>，因为每个<code>then</code> 函数都需要返回一个新的<code>Promise</code>对象，该变量用于保存新的返回对象，然后我们先来改造判断等待态的逻辑</li>
+</ul>
+<pre><code class="language-js">if (that.state === PENDING) {
+  return (promise2 = new MyPromise((resolve, reject) =&gt; {
+    that.resolvedCallbacks.push(() =&gt; {
+      try {
+        const x = onFulfilled(that.value)
+        resolutionProcedure(promise2, x, resolve, reject)
+      } catch (r) {
+        reject(r)
+      }
+    })
+
+    that.rejectedCallbacks.push(() =&gt; {
+      try {
+        const x = onRejected(that.value)
+        resolutionProcedure(promise2, x, resolve, reject)
+      } catch (r) {
+        reject(r)
+      }
+    })
+  }))
+}
+</code></pre>
+<ul>
+<li>首先我们返回了一个新的<code>Promise</code>对象，并在<code>Promise</code>中传入了一个函数</li>
+<li>函数的基本逻辑还是和之前一样，往回调数组中<code>push</code>函数</li>
+<li>同样，在执行函数的过程中可能会遇到错误，所以使用了<code>try...catch</code> 包裹</li>
+<li>规范规定，执行<code>onFulfilled</code> 或者<code>onRejected</code>函数时会返回一个 <code>x</code>，并且执行<code>Promise</code> 解决过程，这是为了不同的 <code>Promise</code>都可以兼容使用，比如 <code>JQuery</code>的<code>Promise</code> 能兼容 <code>ES6</code>的 <code>Promise</code><br>
+接下来我们改造判断执行态的逻辑</li>
+</ul>
+<pre><code class="language-js">if (that.state === RESOLVED) {
+  return (promise2 = new MyPromise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      try {
+        const x = onFulfilled(that.value)
+        resolutionProcedure(promise2, x, resolve, reject)
+      } catch (reason) {
+        reject(reason)
+      }
+    })
+  }))
+}
+</code></pre>
+<ul>
+<li>其实大家可以发现这段代码和判断等待态的逻辑基本一致，无非是传入的函数的函数体需要异步执行，这也是规范规定的</li>
+<li>对于判断拒绝态的逻辑这里就不一一赘述了，留给大家自己完成这个作业<br>
+最后，当然也是最难的一部分，也就是实现兼容多种<code>Promise</code>的 <code>resolutionProcedure</code>函数</li>
+</ul>
+<pre><code class="language-js">function resolutionProcedure(promise2, x, resolve, reject) {
+  if (promise2 === x) {
+    return reject(new TypeError('Error'))
+  }
+}
+</code></pre>
+<p>首先规范规定了<code>x</code> 不能与<code>promise2</code>相等，这样会发生循环引用的问题，比如如下代码</p>
+<pre><code class="language-js">let p = new MyPromise((resolve, reject) =&gt; {
+  resolve(1)
+})
+let p1 = p.then(value =&gt; {
+  return p1
+})
+</code></pre>
+<p>然后需要判断<code>x</code>的类型</p>
+<pre><code class="language-js">if (x instanceof MyPromise) {
+    x.then(function(value) {
+        resolutionProcedure(promise2, value, resolve, reject)
+    }, reject)
+}
+</code></pre>
+<p>这里的代码是完全按照规范实现的。如果<code>x</code>为<code>Promise</code> 的话，需要判断以下几个情况：</p>
+<ul>
+<li>如果 x 处于等待态，<code>Promise</code> 需保持为等待态直至<code>x</code> 被执行或拒绝</li>
+<li>如果 x 处于其他状态，则用相同的值处理 <code>Promise</code><br>
+当然以上这些是规范需要我们判断的情况，实际上我们不判断状态也是可行的。</li>
+</ul>
+<p>接下来我们继续按照规范来实现剩余的代码</p>
+<pre><code class="language-js">let called = false
+if (x !== null &amp;&amp; (typeof x === 'object' || typeof x === 'function')) {
+  try {
+    let then = x.then
+    if (typeof then === 'function') {
+      then.call(
+        x,
+        y =&gt; {
+          if (called) return
+          called = true
+          resolutionProcedure(promise2, y, resolve, reject)
+        },
+        e =&gt; {
+          if (called) return
+          called = true
+          reject(e)
+        }
+      )
+    } else {
+      resolve(x)
+    }
+  } catch (e) {
+    if (called) return
+    called = true
+    reject(e)
+  }
+} else {
+  resolve(x)
+}
+</code></pre>
+<ul>
+<li>首先创建一个变量 <code>called</code> 用于判断是否已经调用过函数</li>
+<li>然后判断 <code>x</code> 是否为对象或者函数，如果都不是的话，将 <code>x</code> 传入 <code>resolve</code> 中</li>
+<li>如果 <code>x</code> 是对象或者函数的话，先把 <code>x.then</code> 赋值给 <code>then</code>，然后判断 <code>then</code> 的类型，如果不是函数类型的话，就将 x 传入 <code>resolve</code> 中</li>
+<li>如果 <code>then</code> 是函数类型的话，就将 x 作为函数的作用域 <code>this</code> 调用之，并且传递两个回调函数作为参数，第一个参数叫做 <code>resolvePromise</code> ，第二个参数叫做 <code>rejectPromise</code>，两个回调函数都需要判断是否已经执行过函数，然后进行相应的逻辑</li>
+<li>以上代码在执行的过程中如果抛错了，将错误传入 <code>reject</code> 函数中<br>
+以上就是符合 <code>Promise/A+</code>规范的实现了，如果你对于这部分代码尚有疑问，欢迎在评论中与我互动</li>
+</ul>
+<h2 id="小结">小结</h2>
+<p>这一章节我们分别实现了简单版和符合<code>Promise/A+</code>规范的<code>Promise</code>，前者已经足够应付大部分面试的手写题目，毕竟写出一个符合规范的 <code>Promise</code> 在面试中不大现实。后者能让你更加深入地理解 <code>Promise</code> 的运行原理，做技术的深挖者</p>
+<h1 id="call-apply-及-bind-函数">call、apply 及 bind 函数</h1>
+<p>首先从以下几点来考虑如何实现这几个函数</p>
+<ul>
+<li>不传入第一个参数，那么上下文默认为 <code>window</code></li>
+<li>改变了 <code>this</code> 指向，让新的对象可以执行该函数，并能接受参数<br>
+那么我们先来实现 <code>call</code></li>
+</ul>
+<pre><code class="language-js">Function.prototype.myCall = function(context) {
+  if (typeof this !== 'function') {
+    throw new TypeError('Error')
+  }
+  context = context || window
+  context.fn = this
+  const args = [...arguments].slice(1)
+  const result = context.fn(...args)
+  delete context.fn
+  return result
+}
+</code></pre>
+<p>以下是对实现的分析：</p>
+<pre><code>- 首先 `context` 为可选参数，如果不传的话默认上下文为 `window`
+- 接下来给 `context` 创建一个 `fn` 属性，并将值设置为需要调用的函数
+- 因为` call` 可以传入多个参数作为调用函数的参数，所以需要将参数剥离出来、然后调用函数并将对象上的函数删除
+</code></pre>
+<p>以上就是实现<code>call</code> 的思路，<code>apply</code> 的实现也类似，区别在于对参数的处理，所以就不一一分析思路了</p>
+<pre><code class="language-js">Function.prototype.myApply = function(context) {
+  if (typeof this !== 'function') {
+    throw new TypeError('Error')
+  }
+  context = context || window
+  context.fn = this
+  let result
+  // 处理参数和 call 有区别
+  if (arguments[1]) {
+    result = context.fn(...arguments[1])
+  } else {
+    result = context.fn()
+  }
+  delete context.fn
+  return result
+}
+</code></pre>
+<p><code>bind</code> 的实现对比其他两个函数略微地复杂了一点，因为 <code>bind</code> 需要返回一个函数，需要判断一些边界问题，以下是 <code>bind</code> 的实现</p>
+<pre><code class="language-jsFunction.prototype.myBind">  if (typeof this !== 'function') {
+    throw new TypeError('Error')
+  }
+  const _this = this
+  const args = [...arguments].slice(1)
+  // 返回一个函数
+  return function F() {
+    // 因为返回了一个函数，我们可以 new F()，所以需要判断
+    if (this instanceof F) {
+      return new _this(...args, ...arguments)
+    }
+    return _this.apply(context, args.concat(...arguments))
+  }
+}
+</code></pre>
+<p>以下是对实现的分析：</p>
+<ul>
+<li>前几步和之前的实现大相径庭，就不赘述了</li>
+<li><code>bind</code> 返回了一个函数，对于函数来说有两种方式调用，一种是直接调用，一种是通过 <code>new</code> 的方式，我们先来说直接调用的方式</li>
+<li>对于直接调用来说，这里选择了 <code>apply</code> 的方式实现，但是对于参数需要注意以下情况：因为 <code>bind</code> 可以实现类似这样的代码 <code>f.bind(obj, 1)(2)</code>，所以我们需要将两边的参数拼接起来，于是就有了这样的实现 <code>args.concat(...arguments)</code></li>
+<li>最后来说通过 <code>new</code> 的方式，在之前的章节中我们学习过如何判断 <code>this</code>，对于 <code>new</code> 的情况来说，不会被任何方式改变 <code>this</code>，所以对于这种情况我们需要忽略传入的 <code>this</code></li>
+</ul>
+<h1 id="垃圾回收机制">垃圾回收机制</h1>
+<p><code>V8</code> 实现了准确式 <code>GC</code>，<code>GC</code> 算法采用了分代式垃圾回收机制。因此，<code>V8</code> 将内存（堆）分为新生代和老生代两部分。</p>
+<h2 id="新生代算法">新生代算法</h2>
+<p>新生代中的对象一般存活时间较短，使用<code>Scavenge GC</code> 算法。</p>
+<p>在新生代空间中，内存空间分为两部分，分别为 <code>From</code> 空间和 <code>To</code> 空间。在这两个空间中，必定有一个空间是使用的，另一个空间是空闲的。新分配的对象会被放入 <code>From</code> 空间中，当 <code>From</code> 空间被占满时，新生代 <code>GC</code> 就会启动了。算法会检查 <code>From</code> 空间中存活的对象并复制到 <code>To</code> 空间中，如果有失活的对象就会销毁。当复制完成后将 <code>From</code> 空间和 <code>To</code> 空间互换，这样 <code>GC</code> 就结束了。</p>
+<h2 id="老生代算法">老生代算法</h2>
+<p>老生代中的对象一般存活时间较长且数量也多，使用了两个算法，分别是标记清除算法和标记压缩算法。</p>
+<p>在讲算法前，先来说下什么情况下对象会出现在老生代空间中：</p>
+<ul>
+<li>新生代中的对象是否已经经历过一次 <code>Scavenge</code> 算法，如果经历过的话，会将对象从新生代空间移到老生代空间中。</li>
+<li><code>To</code> 空间的对象占比大小超过 25 %。在这种情况下，为了不影响到内存分配，会将对象从新生代空间移到老生代空间中。<br>
+老生代中的空间很复杂，有如下几个空间</li>
+</ul>
+<pre><code class="language-js">enum AllocationSpace {
+  // TODO(v8:7464): Actually map this space's memory as read-only.
+  RO_SPACE,    // 不变的对象空间
+  NEW_SPACE,   // 新生代用于 GC 复制算法的空间
+  OLD_SPACE,   // 老生代常驻对象空间
+  CODE_SPACE,  // 老生代代码对象空间
+  MAP_SPACE,   // 老生代 map 对象
+  LO_SPACE,    // 老生代大空间对象
+  NEW_LO_SPACE,  // 新生代大空间对象
+
+  FIRST_SPACE = RO_SPACE,
+  LAST_SPACE = NEW_LO_SPACE,
+  FIRST_GROWABLE_PAGED_SPACE = OLD_SPACE,
+  LAST_GROWABLE_PAGED_SPACE = MAP_SPACE
+};
+</code></pre>
+<p>在老生代中，以下情况会先启动标记清除算法：</p>
+<ul>
+<li>某一个空间没有分块的时候</li>
+<li>空间中被对象超过一定限制</li>
+<li>空间不能保证新生代中的对象移动到老生代中<br>
+在这个阶段中，会遍历堆中所有的对象，然后标记活的对象，在标记完成后，销毁所有没有被标记的对象。在标记大型对内存时，可能需要几百毫秒才能完成一次标记。这就会导致一些性能上的问题。为了解决这个问题，2011 年，<code>V8</code> 从 <code>stop-the-world</code> 标记切换到增量标志。在增量标记期间，<code>GC</code> 将标记工作分解为更小的模块，可以让 <code>JS</code> 应用逻辑在模块间隙执行一会，从而不至于让应用出现停顿情况。但在 2018 年，<code>GC</code> 技术又有了一个重大突破，这项技术名为并发标记。该技术可以让 <code>GC</code> 扫描和标记对象时，同时允许 <code>JS</code> 运行。</li>
+</ul>
+<p>清除对象后会造成堆内存出现碎片的情况，当碎片超过一定限制后会启动压缩算法。在压缩过程中，将活的对象像一端移动，直到所有对象都移动完成然后清理掉不需要的内存。</p>
+<h1 id="节流-vs-防抖">节流 VS 防抖</h1>
+<h2 id="节流">节流</h2>
+<p>考虑一个场景，滚动事件中会发起网络请求，但是我们并不希望用户在滚动过程中一直发起请求，而是隔一段时间发起一次，对于这种情况我们就可以使用节流。</p>
+<p>理解了节流的用途，我们就来实现下这个函数</p>
+<pre><code class="language-js">// func是用户传入需要防抖的函数
+// wait是等待时间
+const throttle = (func, wait = 50) =&gt; {
+  // 上一次执行该函数的时间
+  let lastTime = 0
+  return function(...args) {
+    // 当前时间
+    let now = +new Date()
+    // 将当前时间和上一次执行函数时间对比
+    // 如果差值大于设置的等待时间就执行函数
+    if (now - lastTime &gt; wait) {
+      lastTime = now
+      func.apply(this, args)
+    }
+  }
+}
+
+setInterval(
+  throttle(() =&gt; {
+    console.log(1)
+  }, 500),
+  1
+)
+</code></pre>
+<h2 id="防抖">防抖</h2>
+<p>考虑一个场景，有一个按钮点击会触发网络请求，但是我们并不希望每次点击都发起网络请求，而是当用户点击按钮一段时间后没有再次点击的情况才去发起网络请求，对于这种情况我们就可以使用防抖。</p>
+<p>理解了防抖的用途，我们就来实现下这个函数</p>
+<pre><code class="language-js">// func是用户传入需要防抖的函数
+// wait是等待时间
+const debounce = (func, wait = 50) =&gt; {
+  // 缓存一个定时器id
+  let timer = 0
+  // 这里返回的函数是每次用户实际调用的防抖函数
+  // 如果已经设定过定时器了就清空上一次的定时器
+  // 开始一个新的定时器，延迟执行用户传入的方法
+  return function(...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() =&gt; {
+      func.apply(this, args)
+    }, wait)
+  }
+}
+</code></pre>
+<h1 id="nexttick-原理分析">NextTick 原理分析</h1>
+<p><code>vue</code>的<code>nextTick</code>可以让我们在下次 <code>DOM</code> 更新循环结束之后执行延迟回调，用于获得更新后的 DOM。</p>
+<p>在 Vue 2.4 之前都是使用的 <code>microtasks</code>，但是 <code>microtasks</code> 的优先级过高，在某些情况下可能会出现比事件冒泡更快的情况，但如果都使用 macrotasks 又可能会出现渲染的性能问题。所以在新版本中，会默认使用 <code>microtasks</code>，但在特殊情况下会使用 <code>macrotasks</code>，比如<code>v-on</code>。</p>
+<p>对于实现 <code>macrotasks</code> ，会先判断是否能使用 <code>setImmediate</code> ，不能的话降级为 <code>MessageChannel</code>，以上都不行的话就使用<code>setTimeout</code></p>
+<pre><code class="language-js">if (typeof setImmediate !== 'undefined' &amp;&amp; isNative(setImmediate)) {
+  macroTimerFunc = () =&gt; {
+    setImmediate(flushCallbacks)
+  }
+} else if (
+  typeof MessageChannel !== 'undefined' &amp;&amp;
+  (isNative(MessageChannel) ||
+    // PhantomJS
+    MessageChannel.toString() === '[object MessageChannelConstructor]')
+) {
+  const channel = new MessageChannel()
+  const port = channel.port2
+  channel.port1.onmessage = flushCallbacks
+  macroTimerFunc = () =&gt; {
+    port.postMessage(1)
+  }
+} else {
+  macroTimerFunc = () =&gt; {
+    setTimeout(flushCallbacks, 0)
+  }
+</code></pre>
+<p>以上代码很简单，就是判断能不能使用相应的 API</p>
+<h1 id="时间复杂度">时间复杂度</h1>
+<p>在进入正题之前，我们先来了解下什么是时间复杂度。</p>
+<p>通常使用最差的时间复杂度来衡量一个算法的好坏。</p>
+<p>常数时间 <code>O(1)</code>代表这个操作和数据量没关系，是一个固定时间的操作，比如说四则运算。</p>
+<p>对于一个算法来说，可能会计算出操作次数为 <code>aN + 1</code>，<code>N</code>代表数据量。那么该算法的时间复杂度就是 <code>O(N)</code>。因为我们在计算时间复杂度的时候，数据量通常是非常大的，这时候低阶项和常数项可以忽略不计。</p>
+<p>当然可能会出现两个算法都是 <code>O(N)</code> 的时间复杂度，那么对比两个算法的好坏就要通过对比低阶项和常数项了</p>
+<h2 id="栈">栈</h2>
+<p>栈是一个线性结构，在计算机中是一个相当常见的数据结构。</p>
+<p>栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则<br>
+<img src="https://user-gold-cdn.xitu.io/2018/5/20/1637b785d2d68735?imageView2/0/w/1280/h/960/format/ignore-error/1"></p>
+<h3 id="实现">实现</h3>
+<p>每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现</p>
+<pre><code class="language-js">class Stack {
+  constructor() {
+    this.stack = []
+  }
+  push(item) {
+    this.stack.push(item)
+  }
+  pop() {
+    this.stack.pop()
+  }
+  peek() {
+    return this.stack[this.getCount() - 1]
+  }
+  getCount() {
+    return this.stack.length
+  }
+  isEmpty() {
+    return this.getCount() === 0
+  }
+}
+</code></pre>
+<h3 id="应用">应用</h3>
+<p>选取了<a href="https://leetcode-cn.com/problems/valid-parentheses/"> LeetCode 上序号为 20 的题目</a></p>
+<p>题意是匹配括号，可以通过栈的特性来完成这道题目</p>
+<pre><code class="language-js">var isValid = function (s) {
+  let map = {
+    '(': -1,
+    ')': 1,
+    '[': -2,
+    ']': 2,
+    '{': -3,
+    '}': 3
+  }
+  let stack = []
+  for (let i = 0; i &lt; s.length; i++) {
+    if (map[s[i]] &lt; 0) {
+      stack.push(s[i])
+    } else {
+      let last = stack.pop()
+      if (map[last] + map[s[i]] != 0) return false
+    }
+  }
+  if (stack.length &gt; 0) return false
+  return true
+};
+</code></pre>
+<p>其实在 Vue 中关于模板解析的代码，就有应用到匹配尖括号的内容</p>
+<h2 id="队列">队列</h2>
+<p>队列是一个线性结构，特点是在某一端添加数据，在另一端删除数据，遵循先进先出的原则。<br>
+<img src="https://user-gold-cdn.xitu.io/2018/5/20/1637cba2a6155793?imageView2/0/w/1280/h/960/format/ignore-error/1"></p>
+<h3 id="实现-2">实现</h3>
+<p>这里会讲解两种实现队列的方式，分别是单链队列和循环队列。</p>
+<p>单链队列</p>
+<pre><code class="language-js">class Queue {
+  constructor() {
+    this.queue = []
+  }
+  enQueue(item) {
+    this.queue.push(item)
+  }
+  deQueue() {
+    return this.queue.shift()
+  }
+  getHeader() {
+    return this.queue[0]
+  }
+  getLength() {
+    return this.queue.length
+  }
+  isEmpty() {
+    return this.getLength() === 0
+  }
+}
+</code></pre>
+<p>因为单链队列在出队操作的时候需要 <code>O(n)</code>的时间复杂度，所以引入了循环队列。循环队列的出队操作平均是<code>O(1)</code> 的时间复杂度。</p>
+<p>循环队列</p>
+<pre><code class="language-js">class SqQueue {
+  constructor(length) {
+    this.queue = new Array(length + 1)
+    // 队头
+    this.first = 0
+    // 队尾
+    this.last = 0
+    // 当前队列大小
+    this.size = 0
+  }
+  enQueue(item) {
+    // 判断队尾 + 1 是否为队头
+    // 如果是就代表需要扩容数组
+    // % this.queue.length 是为了防止数组越界
+    if (this.first === (this.last + 1) % this.queue.length) {
+      this.resize(this.getLength() * 2 + 1)
+    }
+    this.queue[this.last] = item
+    this.size++
+    this.last = (this.last + 1) % this.queue.length
+  }
+  deQueue() {
+    if (this.isEmpty()) {
+      throw Error('Queue is empty')
+    }
+    let r = this.queue[this.first]
+    this.queue[this.first] = null
+    this.first = (this.first + 1) % this.queue.length
+    this.size--
+    // 判断当前队列大小是否过小
+    // 为了保证不浪费空间，在队列空间等于总长度四分之一时
+    // 且不为 2 时缩小总长度为当前的一半
+    if (this.size === this.getLength() / 4 &amp;&amp; this.getLength() / 2 !== 0) {
+      this.resize(this.getLength() / 2)
+    }
+    return r
+  }
+  getHeader() {
+    if (this.isEmpty()) {
+      throw Error('Queue is empty')
+    }
+    return this.queue[this.first]
+  }
+  getLength() {
+    return this.queue.length - 1
+  }
+  isEmpty() {
+    return this.first === this.last
+  }
+  resize(length) {
+    let q = new Array(length)
+    for (let i = 0; i &lt; length; i++) {
+      q[i] = this.queue[(i + this.first) % this.queue.length]
+    }
+    this.queue = q
+    this.first = 0
+    this.last = this.size
+  }
+}
+</code></pre>
+<h2 id="链表">链表</h2>
+<h3 id="概念">概念</h3>
+<p>链表是一个线性结构，同时也是一个天然的递归结构。链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。但是链表失去了数组随机读取的优点，同时链表由于增加了结点的指针域，空间开销比较大。<br>
+<img src="https://user-gold-cdn.xitu.io/2018/5/22/16388487759b1152?imageView2/0/w/1280/h/960/format/ignore-error/1"></p>
+<h3 id="实现-3">实现</h3>
+<p>单向链表</p>
+<pre><code class="language-js">class Node {
+  constructor(v, next) {
+    this.value = v
+    this.next = next
+  }
+}
+class LinkList {
+  constructor() {
+    // 链表长度
+    this.size = 0
+    // 虚拟头部
+    this.dummyNode = new Node(null, null)
+  }
+  find(header, index, currentIndex) {
+    if (index === currentIndex) return header
+    return this.find(header.next, index, currentIndex + 1)
+  }
+  addNode(v, index) {
+    this.checkIndex(index)
+    // 当往链表末尾插入时，prev.next 为空
+    // 其他情况时，因为要插入节点，所以插入的节点
+    // 的 next 应该是 prev.next
+    // 然后设置 prev.next 为插入的节点
+    let prev = this.find(this.dummyNode, index, 0)
+    prev.next = new Node(v, prev.next)
+    this.size++
+    return prev.next
+  }
+  insertNode(v, index) {
+    return this.addNode(v, index)
+  }
+  addToFirst(v) {
+    return this.addNode(v, 0)
+  }
+  addToLast(v) {
+    return this.addNode(v, this.size)
+  }
+  removeNode(index, isLast) {
+    this.checkIndex(index)
+    index = isLast ? index - 1 : index
+    let prev = this.find(this.dummyNode, index, 0)
+    let node = prev.next
+    prev.next = node.next
+    node.next = null
+    this.size--
+    return node
+  }
+  removeFirstNode() {
+    return this.removeNode(0)
+  }
+  removeLastNode() {
+    return this.removeNode(this.size, true)
+  }
+  checkIndex(index) {
+    if (index &lt; 0 || index &gt; this.size) throw Error('Index error')
+  }
+  getNode(index) {
+    this.checkIndex(index)
+    if (this.isEmpty()) return
+    return this.find(this.dummyNode, index, 0).next
+  }
+  isEmpty() {
+    return this.size === 0
+  }
+  getSize() {
+    return this.size
+  }
+}
+</code></pre>
+<h2 id="树">树</h2>
+<h3 id="二叉树">二叉树</h3>
+<p>树拥有很多种结构，二叉树是树中最常用的结构，同时也是一个天然的递归结构。</p>
+<p>二叉树拥有一个根节点，每个节点至多拥有两个子节点，分别为：左节点和右节点。树的最底部节点称之为叶节点，当一颗树的叶数量数量为满时，该树可以称之为满二叉树。<br>
+<img src="https://user-gold-cdn.xitu.io/2018/5/22/163884f74c9f4e4d?imageView2/0/w/1280/h/960/format/ignore-error/1"></p>
+<h3 id="二分搜索树">二分搜索树</h3>
+<p>二分搜索树也是二叉树，拥有二叉树的特性。但是区别在于二分搜索树每个节点的值都比他的左子树的值大，比右子树的值小。</p>
+<p>这种存储方式很适合于数据搜索。如下图所示，当需要查找 6 的时候，因为需要查找的值比根节点的值大，所以只需要在根节点的右子树上寻找，大大提高了搜索效率。<br>
+<img src="https://user-gold-cdn.xitu.io/2018/5/22/1638850ba7458208?imageView2/0/w/1280/h/960/format/ignore-error/1"></p>
+<h3 id="实现-4">实现</h3>
+<pre><code class="language-js">class Node {
+  constructor(value) {
+    this.value = value
+    this.left = null
+    this.right = null
+  }
+}
+class BST {
+  constructor() {
+    this.root = null
+    this.size = 0
+  }
+  getSize() {
+    return this.size
+  }
+  isEmpty() {
+    return this.size === 0
+  }
+  addNode(v) {
+    this.root = this._addChild(this.root, v)
+  }
+  // 添加节点时，需要比较添加的节点值和当前
+  // 节点值的大小
+  _addChild(node, v) {
+    if (!node) {
+      this.size++
+      return new Node(v)
+    }
+    if (node.value &gt; v) {
+      node.left = this._addChild(node.left, v)
+    } else if (node.value &lt; v) {
+      node.right = this._addChild(node.right, v)
+    }
+    return node
+  }
+}
+</code></pre>
+<p>以上是最基本的二分搜索树实现，接下来实现树的遍历。</p>
+<p>对于树的遍历来说，有三种遍历方法，分别是先序遍历、中序遍历、后序遍历。三种遍历的区别在于何时访问节点。在遍历树的过程中，每个节点都会遍历三次，分别是遍历到自己，遍历左子树和遍历右子树。如果需要实现先序遍历，那么只需要第一次遍历到节点时进行操作即可。</p>
+<pre><code class="language-js">// 先序遍历可用于打印树的结构
+// 先序遍历先访问根节点，然后访问左节点，最后访问右节点。
+preTraversal() {
+  this._pre(this.root)
+}
+_pre(node) {
+  if (node) {
+    console.log(node.value)
+    this._pre(node.left)
+    this._pre(node.right)
+  }
+}
+// 中序遍历可用于排序
+// 对于 BST 来说，中序遍历可以实现一次遍历就
+// 得到有序的值
+// 中序遍历表示先访问左节点，然后访问根节点，最后访问右节点。
+midTraversal() {
+  this._mid(this.root)
+}
+_mid(node) {
+  if (node) {
+    this._mid(node.left)
+    console.log(node.value)
+    this._mid(node.right)
+  }
+}
+// 后序遍历可用于先操作子节点
+// 再操作父节点的场景
+// 后序遍历表示先访问左节点，然后访问右节点，最后访问根节点。
+backTraversal() {
+  this._back(this.root)
+}
+_back(node) {
+  if (node) {
+    this._back(node.left)
+    this._back(node.right)
+    console.log(node.value)
+  }
+}
+</code></pre>
+<p>以上的这几种遍历都可以称之为深度遍历，对应的还有种遍历叫做广度遍历，也就是一层层地遍历树。对于广度遍历来说，我们需要利用之前讲过的队列结构来完成。</p>
+<pre><code class="language-js">breadthTraversal() {
+  if (!this.root) return null
+  let q = new Queue()
+  // 将根节点入队
+  q.enQueue(this.root)
+  // 循环判断队列是否为空，为空
+  // 代表树遍历完毕
+  while (!q.isEmpty()) {
+    // 将队首出队，判断是否有左右子树
+    // 有的话，就先左后右入队
+    let n = q.deQueue()
+    console.log(n.value)
+    if (n.left) q.enQueue(n.left)
+    if (n.right) q.enQueue(n.right)
+  }
+}
+</code></pre>
+<p>接下来先介绍如何在树中寻找最小值或最大数。因为二分搜索树的特性，所以最小值一定在根节点的最左边，最大值相反</p>
+<pre><code class="language-js">getMin() {
+  return this._getMin(this.root).value
+}
+_getMin(node) {
+  if (!node.left) return node
+  return this._getMin(node.left)
+}
+getMax() {
+  return this._getMax(this.root).value
+}
+_getMax(node) {
+  if (!node.right) return node
+  return this._getMin(node.right)
+}
+</code></pre>
+<p><strong>向上取整和向下取整</strong>，这两个操作是相反的，所以代码也是类似的，这里只介绍如何向下取整。既然是向下取整，那么根据二分搜索树的特性，值一定在根节点的左侧。只需要一直遍历左子树直到当前节点的值不再大于等于需要的值，然后判断节点是否还拥有右子树。如果有的话，继续上面的递归判断。</p>
+<pre><code class="language-js">floor(v) {
+  let node = this._floor(this.root, v)
+  return node ? node.value : null
+}
+_floor(node, v) {
+  if (!node) return null
+  if (node.value === v) return v
+  // 如果当前节点值还比需要的值大，就继续递归
+  if (node.value &gt; v) {
+    return this._floor(node.left, v)
+  }
+  // 判断当前节点是否拥有右子树
+  let right = this._floor(node.right, v)
+  if (right) return right
+  return node
+}
+</code></pre>
+<p><strong>排名</strong>，这是用于获取给定值的排名或者排名第几的节点的值，这两个操作也是相反的，所以这个只介绍如何获取排名第几的节点的值。对于这个操作而言，我们需要略微的改造点代码，让每个节点拥有一个 size 属性。该属性表示该节点下有多少子节点（包含自身）。</p>
+<pre><code class="language-js">class Node {
+  constructor(value) {
+    this.value = value
+    this.left = null
+    this.right = null
+    // 修改代码
+    this.size = 1
+  }
+}
+// 新增代码
+_getSize(node) {
+  return node ? node.size : 0
+}
+_addChild(node, v) {
+  if (!node) {
+    return new Node(v)
+  }
+  if (node.value &gt; v) {
+    // 修改代码
+    node.size++
+    node.left = this._addChild(node.left, v)
+  } else if (node.value &lt; v) {
+    // 修改代码
+    node.size++
+    node.right = this._addChild(node.right, v)
+  }
+  return node
+}
+select(k) {
+  let node = this._select(this.root, k)
+  return node ? node.value : null
+}
+_select(node, k) {
+  if (!node) return null
+  // 先获取左子树下有几个节点
+  let size = node.left ? node.left.size : 0
+  // 判断 size 是否大于 k
+  // 如果大于 k，代表所需要的节点在左节点
+  if (size &gt; k) return this._select(node.left, k)
+  // 如果小于 k，代表所需要的节点在右节点
+  // 注意这里需要重新计算 k，减去根节点除了右子树的节点数量
+  if (size &lt; k) return this._select(node.right, k - size - 1)
+  return node
+}
+</code></pre>
+<p>接下来讲解的是二分搜索树中最难实现的部分：删除节点。因为对于删除节点来说，会存在以下几种情况</p>
+<ul>
+<li>需要删除的节点没有子树</li>
+<li>需要删除的节点只有一条子树</li>
+<li>需要删除的节点有左右两条树<br>
+对于前两种情况很好解决，但是第三种情况就有难度了，所以先来实现相对简单的操作：删除最小节点，对于删除最小节点来说，是不存在第三种情况的，删除最大节点操作是和删除最小节点相反的，所以这里也就不再赘述。</li>
+</ul>
+<pre><code class="language-js">delectMin() {
+  this.root = this._delectMin(this.root)
+  console.log(this.root)
+}
+_delectMin(node) {
+  // 一直递归左子树
+  // 如果左子树为空，就判断节点是否拥有右子树
+  // 有右子树的话就把需要删除的节点替换为右子树
+  if ((node != null) &amp; !node.left) return node.right
+  node.left = this._delectMin(node.left)
+  // 最后需要重新维护下节点的 `size`
+  node.size = this._getSize(node.left) + this._getSize(node.right) + 1
+  return node
+}
+
+</code></pre>
+<p>最后讲解的就是如何删除任意节点了。对于这个操作，T.Hibbard 在 1962 年提出了解决这个难题的办法，也就是如何解决第三种情况。</p>
+<p>当遇到这种情况时，需要取出当前节点的后继节点（也就是当前节点右子树的最小节点）来替换需要删除的节点。然后将需要删除节点的左子树赋值给后继结点，右子树删除后继结点后赋值给他。</p>
+<p>你如果对于这个解决办法有疑问的话，可以这样考虑。因为二分搜索树的特性，父节点一定比所有左子节点大，比所有右子节点小。那么当需要删除父节点时，势必需要拿出一个比父节点大的节点来替换父节点。这个节点肯定不存在于左子树，必然存在于右子树。然后又需要保持父节点都是比右子节点小的，那么就可以取出右子树中最小的那个节点来替换父节点。</p>
+<pre><code class="language-js">delect(v) {
+  this.root = this._delect(this.root, v)
+}
+_delect(node, v) {
+  if (!node) return null
+  // 寻找的节点比当前节点小，去左子树找
+  if (node.value &lt; v) {
+    node.right = this._delect(node.right, v)
+  } else if (node.value &gt; v) {
+    // 寻找的节点比当前节点大，去右子树找
+    node.left = this._delect(node.left, v)
+  } else {
+    // 进入这个条件说明已经找到节点
+    // 先判断节点是否拥有拥有左右子树中的一个
+    // 是的话，将子树返回出去，这里和 `_delectMin` 的操作一样
+    if (!node.left) return node.right
+    if (!node.right) return node.left
+    // 进入这里，代表节点拥有左右子树
+    // 先取出当前节点的后继结点，也就是取当前节点右子树的最小值
+    let min = this._getMin(node.right)
+    // 取出最小值后，删除最小值
+    // 然后把删除节点后的子树赋值给最小值节点
+    min.right = this._delectMin(node.right)
+    // 左子树不动
+    min.left = node.left
+    node = min
+  }
+  // 维护 size
+  node.size = this._getSize(node.left) + this._getSize(node.right) + 1
+  return node
+}
+
+</code></pre>
 
         </div>
 
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/UM5pBKYXk">
+            <span class="flex-auto">算法</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/2CfEuLztL5">
+            <span class="flex-auto">数据结构</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/nrxUbY8Oi9">
+            <span class="flex-auto">Promise</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/iVBb1fbkxu">
+            <span class="flex-auto">堆</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/UOstSc7Ilp">
+            <span class="flex-auto">栈</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/ZueuVX85rH">
+            <span class="flex-auto">源码</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/YKq-0_lusx">
+            <span class="flex-auto">原理</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/y44dZfwlJ">
+            <span class="flex-auto">ES6</span>
+          </a>
         
 
 
