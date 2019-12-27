@@ -1,0 +1,577 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>代码猿</title>
+<meta name="description" content="听闻远方有你<br>
+动身跋涉千里<br>
+我吹过你吹过的风<br>
+这算不算相拥<br>
+我喜欢你<br>
+从一而终<br>
+认真且怂<br>" />
+<link rel="shortcut icon" href="https://yleexie.github.io/favicon.ico?v=1577430994042">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://yleexie.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="代码猿 - Atom Feed" href="https://yleexie.github.io/atom.xml">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://yleexie.github.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://yleexie.github.io/images/avatar.png?v=1577430994042" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">代码猿</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#base64%E5%8A%A0%E5%AF%86">Base64加密</a></li>
+<li><a href="#utf8%E8%BD%AC%E6%8D%A2">utf8转换</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AChashcode">字符串转hashCode</a></li>
+<li><a href="#%E4%B8%96%E7%95%8C%E4%B8%96%E7%95%8C%E8%BD%AC%E5%B9%B4%E6%9C%88%E6%97%A5">世界世界转年/月/日</a></li>
+<li><a href="#%E9%80%A2%E4%B8%89%E5%8A%A0%E9%80%97%E5%8F%B7%E5%A4%84%E7%90%86%E9%87%91%E9%A2%9D">逢三加逗号(处理金额)</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3tofixed%E4%B8%8D%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98">解决toFixed不兼容问题</a></li>
+<li><a href="#%E8%8A%82%E6%B5%81">节流</a></li>
+<li><a href="#%E9%98%B2%E6%8A%96">防抖</a></li>
+<li><a href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%BE%AE%E4%BF%A1qq-%E6%88%96-uc">判断是否是微信,qq 或 uc</a></li>
+<li><a href="#%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E6%98%AF-iphonex">检查是否是 IphoneX</a></li>
+<li><a href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%96%87%E4%BB%B6%E5%8D%95%E4%BD%8D">格式化文件单位</a></li>
+<li><a href="#%E5%AF%B9%E8%B1%A1%E6%B7%B1%E5%85%8B%E9%9A%86">对象深克隆</a></li>
+<li><a href="#%E5%85%A8%E9%83%A8%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%86%99%E5%BC%80%E5%A4%B4">全部字母大写开头</a></li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://yleexie.github.io/post/AGY0xEDLZ/" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"><img src="https://cdn.img.wenhairu.com/images/2019/10/10/8hMaB.png" alt="8hMaB.png" border="0">&nbsp;&nbsp;代码猿</div>
+    <!-- <a class="rss" href="https://yleexie.github.io/atom.xml" target="_blank">RSS</a> -->
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">常用工具类库</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2019-12-05 / 7 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://image.uisdc.com/wp-content/uploads/2018/08/uisdc-ys-20180814-10.jpg" alt="">
+        
+        <div class="post-content yue">
+          <h1 id="base64加密">Base64加密</h1>
+<pre><code class="language-js">function Base64(input) {
+  const _keyStr =
+    &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=&quot;;
+  var output = &quot;&quot;;
+  var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+  var i = 0;
+  input = _utf8_encode(input);
+  while (i &lt; input.length) {
+    chr1 = input.charCodeAt(i++);
+    chr2 = input.charCodeAt(i++);
+    chr3 = input.charCodeAt(i++);
+    enc1 = chr1 &gt;&gt; 2;
+    enc2 = ((chr1 &amp; 3) &lt;&lt; 4) | (chr2 &gt;&gt; 4);
+    enc3 = ((chr2 &amp; 15) &lt;&lt; 2) | (chr3 &gt;&gt; 6);
+    enc4 = chr3 &amp; 63;
+    if (isNaN(chr2)) {
+      enc3 = enc4 = 64;
+    } else if (isNaN(chr3)) {
+      enc4 = 64;
+    }
+    output =
+      output +
+      _keyStr.charAt(enc1) +
+      _keyStr.charAt(enc2) +
+      _keyStr.charAt(enc3) +
+      _keyStr.charAt(enc4);
+  }
+  return output;
+}
+</code></pre>
+<h1 id="utf8转换">utf8转换</h1>
+<pre><code class="language-js">function _utf8_encode(string) {
+  string = string.replace(/\r\n/g, &quot;\n&quot;);
+  var utftext = &quot;&quot;;
+  for (var n = 0; n &lt; string.length; n++) {
+    var c = string.charCodeAt(n);
+    if (c &lt; 128) {
+      utftext += String.fromCharCode(c);
+    } else if (c &gt; 127 &amp;&amp; c &lt; 2048) {
+      utftext += String.fromCharCode((c &gt;&gt; 6) | 192);
+      utftext += String.fromCharCode((c &amp; 63) | 128);
+    } else {
+      utftext += String.fromCharCode((c &gt;&gt; 12) | 224);
+      utftext += String.fromCharCode(((c &gt;&gt; 6) &amp; 63) | 128);
+      utftext += String.fromCharCode((c &amp; 63) | 128);
+    }
+  }
+  return utftext;
+}
+</code></pre>
+<h1 id="字符串转hashcode">字符串转hashCode</h1>
+<pre><code class="language-js"> function hashCode(str) {
+  let hash = 0;
+  if (str.length === 0) return hash;
+  for (let i = 0; i &lt; str.length; i++) {
+    let char = str.charCodeAt(i);
+    hash = (hash &lt;&lt; 5) - hash + char;
+    hash = hash &amp; hash; // Convert to 32bit integer
+  }
+  return hash;
+}
+</code></pre>
+<h1 id="世界世界转年月日">世界世界转年/月/日</h1>
+<pre><code class="language-js">function timeTransform(time) {
+  if (time) {
+    let timeA = new Date(time)
+      .toLocaleString(&quot;chinese&quot;, { hour12: false })
+      .split(&quot; &quot;);
+    return timeA[0];
+  } else {
+    return &quot;&quot;;
+  }
+}
+</code></pre>
+<h1 id="逢三加逗号处理金额">逢三加逗号(处理金额)</h1>
+<pre><code class="language-js"> function NumFormat(value) {
+  if (!parseInt(value, 10)) return &quot;0.00&quot;;
+  //var intPart = Number(value).toFixed(0); //获取整数部分
+  var intPart = parseInt(value, 10);
+  var intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, &quot;$1,&quot;); //将整数部分逢三���断
+
+  var floatPart = &quot;.00&quot;; //预定义小数部分
+  var value2Array = value.split(&quot;.&quot;);
+  if (value2Array.length === 2) {
+    floatPart = value2Array[1].toString(); //拿到小数部分
+    if (floatPart.length === 1) {
+      //补0,实际上用不着
+      return intPartFormat + &quot;.&quot; + floatPart + &quot;0&quot;;
+    } else {
+      return intPartFormat + &quot;.&quot; + floatPart;
+    }
+  } else {
+    return intPartFormat + floatPart;
+  }
+}
+</code></pre>
+<h1 id="解决tofixed不兼容问题">解决toFixed不兼容问题</h1>
+<pre><code class="language-js">function toFixeds(value,n) {
+  if (n &gt; 20 || n &lt; 0) {
+      throw new RangeError('toFixed() digits argument must be between 0 and 20');
+  }
+  const number = value;
+  if (isNaN(number) || number &gt;= Math.pow(10, 21)) {
+      return number;
+  }
+  if (typeof (n) === 'undefined' || n === 0) {
+      return (Math.round(number)).toString();
+  }
+
+  let result = number.toString();
+  const arr = result.split('.');
+
+  // 整数的情况
+  if (arr.length &lt; 2) {
+      result += '.';
+      for (let i = 0; i &lt; n; i += 1) {
+          result += '0';
+      }
+      return result;
+  }
+
+  const integer = arr[0];
+  const decimal = arr[1];
+  if (decimal.length === n) {
+      return result;
+  }
+  if (decimal.length &lt; n) {
+      for (let i = 0; i &lt; n - decimal.length; i += 1) {
+          result += '0';
+      }
+      return result;
+  }
+  result = integer + '.' + decimal.substr(0, n);
+  const last = decimal.substr(n, 1);
+
+  // 四舍五入，转换为整数再处理，避免浮点数精度的损失
+  if (parseInt(last, 10) &gt;= 5) {
+      const x = Math.pow(10, n);
+      result = (Math.round((parseFloat(result) * x)) + 1) / x;
+      result = result.toFixed(n);
+  }
+
+  return result;
+};
+</code></pre>
+<h1 id="节流">节流</h1>
+<pre><code class="language-js">throttle(fn, ms) {
+	let canRun = true; // 通过闭包保存一个标记
+	return function () {
+		if (!canRun) return; // 在函数开头判断标记是否为true，不为true则return
+		canRun = false; // 立即设置为false
+		setTimeout(() =&gt; { // 将外部传入的函数的执行放在setTimeout中
+			fn.apply(this, arguments);
+			/* 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。
+			当定时器没有执行的时候标记永远是false在开头被return掉 */
+			canRun = true;
+		}, ms);
+	};
+}
+</code></pre>
+<h1 id="防抖">防抖</h1>
+<pre><code class="language-js"> function debounce(fn, ms) {
+  let timeoutId
+  return function () {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() =&gt; {
+      fn.apply(this, arguments)
+    }, ms)
+  }
+}
+</code></pre>
+<h1 id="判断是否是微信qq-或-uc">判断是否是微信,qq 或 uc</h1>
+<pre><code class="language-js"> const checkWeixinQqUc = () =&gt; {
+  const u = navigator.userAgent;
+  const obj = {
+    weixin: u.indexOf(&quot;MicroMessenger&quot;) &gt; -1, //是否微信
+    qq: u.match(/QQ/i) == &quot;qq&quot;&amp;&amp;!u.indexOf('MQQBrowser') &gt; -1, //是否QQ
+    uc: u.indexOf('UCBrowser') &gt; -1
+  }
+  return Object.keys(obj)[Object.values(obj).indexOf(true)]
+};
+</code></pre>
+<h1 id="检查是否是-iphonex">检查是否是 IphoneX</h1>
+<pre><code class="language-js">/**
+ * 检查是否是 IphoneX
+ */
+export const checkIsIphoneX = () =&gt; {
+  const u = navigator.userAgent;
+  const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+  if (isIOS &amp;&amp; screen.height &gt;= 812) {
+    return true;
+  }
+};
+</code></pre>
+<h1 id="格式化文件单位">格式化文件单位</h1>
+<pre><code class="language-js">/**
+ * 格式化文件单位
+ * @param {String || Number} size  文件大小(kb)
+ */
+export const fileFormatSize = size =&gt; {
+  var i
+  var unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
+  for (i = 0; i &lt; unit.length &amp;&amp; size &gt;= 1024; i++) {
+    size /= 1024
+  }
+  return (Math.round(size * 100) / 100 || 0) + unit[i]
+}
+</code></pre>
+<h1 id="对象深克隆">对象深克隆</h1>
+<pre><code class="language-js">/**
+ * 对象深度克隆,
+ * JSON.stringify深度克隆对象
+ * 无法对函数 、RegExp等特殊对象的克隆,
+ * 会抛弃对象的constructor,所有的构造函数会指向Object
+ * 对象有循环引用,会报错
+ * @param {Object}  obj 克隆的对象
+ */
+export const objDeepClone = obj =&gt; {
+  return clone(obj)
+}
+
+const isType = (obj, type) =&gt; {
+  if (typeof obj !== 'object') return false;
+  // 判断数据类型的经典方法：
+  const typeString = Object.prototype.toString.call(obj);
+  let flag;
+  switch (type) {
+    case 'Array':
+      flag = typeString === '[object Array]';
+      break;
+    case 'Date':
+      flag = typeString === '[object Date]';
+      break;
+    case 'RegExp':
+      flag = typeString === '[object RegExp]';
+      break;
+    default:
+      flag = false;
+  }
+  return flag;
+};
+
+/**
+* deep clone
+* @param  {[type]} parent object 需要进行克隆的对象
+* @return {[type]}        深克隆后的对象
+*/
+const clone = parent =&gt; {
+  // 维护两个储存循环引用的数组
+  const parents = []
+  const children = []
+
+  const _clone = parent =&gt; {
+    if (parent === null) return null
+    if (typeof parent !== 'object') return parent
+
+    let child, proto
+
+    if (isType(parent, 'Array')) {
+      // 对数组做特殊处理
+      child = []
+    } else if (isType(parent, 'RegExp')) {
+      // 对正则对象做特殊处理
+      child = new RegExp(parent.source, getRegExp(parent))
+      if (parent.lastIndex) child.lastIndex = parent.lastIndex
+    } else if (isType(parent, 'Date')) {
+      // 对Date对象做特殊处理
+      child = new Date(parent.getTime())
+    } else {
+      // 处理对象原型
+      proto = Object.getPrototypeOf(parent)
+      // 利用Object.create切断原型链
+      child = Object.create(proto)
+    }
+
+    // 处理循环引用
+    const index = parents.indexOf(parent)
+
+    if (index !== -1) {
+      // 如果父数组存在本对象,说明之前已经被引用过,直接返回此对象
+      return children[index]
+    }
+    parents.push(parent)
+    children.push(child)
+
+    for (const i in parent) {
+      // 递归
+      child[i] = _clone(parent[i])
+    }
+
+    return child
+  }
+  return _clone(parent)
+}
+</code></pre>
+<h1 id="全部字母大写开头">全部字母大写开头</h1>
+<pre><code class="language-js">export const strToCapitalLetter = (str) =&gt; {
+  const strOne = str.toLowerCase()
+  return strOne.charAt(0).toUpperCase() + strOne.slice(1)
+}
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/ld-VhnDv-">
+            <span class="flex-auto">工具</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/3X7p4WJFGk">
+            <span class="flex-auto">函数</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://yleexie.github.io/tag/SusqhE8gf">
+            <span class="flex-auto">JavaScript</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://yleexie.github.io/post/_lbc0sFsr">
+                <h3 class="post-title">
+                  前端性能优化分布
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '26e86b8acd36313b1772',
+    clientSecret: 'c7fd619e3cde059a1e0815d515d06c0af2f6a5ff',
+    repo: 'YLeeXIE.github.io',
+    owner: 'YLeeXIE',
+    admin: ['YLeeXIE'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://yleexie.github.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
